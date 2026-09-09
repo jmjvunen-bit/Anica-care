@@ -46,7 +46,7 @@
   --ink-mid:  #5C4030;   /* warm mid text */
   --ink-soft: #9A7E6A;   /* klei-light — labels, captions */
   /* accent & identity */
-  --klei:     #A56230;   /* klei — accent, links */
+  --klei:     #87674E;   /* klei — accent, links */
   --taupe:    #B09A84;   /* taupe — muted highlight colour */
   /* dividers */
   --rule:     rgba(100,65,40,0.13);
@@ -76,7 +76,7 @@
     --ink:      #F0E6DA;
     --ink-mid:  #C4A888;
     --ink-soft: #7A6050;
-    --klei:     #D4956A;
+    --klei:     #C49A78;
     --taupe:    #8A7060;
     --rule:     rgba(200,165,130,0.10);
     --rule-mid: rgba(200,165,130,0.18);
@@ -94,7 +94,7 @@
   --ink:      #F0E6DA;
   --ink-mid:  #C4A888;
   --ink-soft: #7A6050;
-  --klei:     #D4956A;
+  --klei:     #C49A78;
   --taupe:    #8A7060;
   --rule:     rgba(200,165,130,0.10);
   --rule-mid: rgba(200,165,130,0.18);
@@ -1216,6 +1216,76 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   .over-hero-sec { padding-block: 6rem 4rem; }
   .over-sec { padding-block: 4.5rem; }
 }
+
+/* ── Intro positioning section (replaces triad) ── */
+.intro-pos {
+  padding: 6rem var(--pad);
+  border-bottom: 1px solid var(--rule);
+}
+.intro-pos-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 44rem;
+}
+.intro-pos-title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+.intro-pos-lead {
+  font-size: 1rem;
+  color: var(--ink-mid);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+}
+.intro-pos-qs {
+  list-style: none;
+  padding: 0 0 0 1.25rem;
+  margin: 0 0 1.75rem;
+  border-left: 2px solid var(--klei);
+}
+.intro-pos-qs li {
+  font-size: 1rem;
+  color: var(--ink);
+  line-height: 1.85;
+}
+.intro-pos-body {
+  font-size: 1rem;
+  color: var(--ink-mid);
+  line-height: 1.85;
+}
+@media (max-width: 640px) {
+  .intro-pos { padding: 4rem var(--pad); }
+}
+
+/* ── Werkwijze: flat list for services (no staircase) ── */
+.wk-step:nth-child(2) { padding-left: 0; }
+.wk-step:nth-child(3) { padding-left: 0; }
+.wk-step-title { font-style: normal; letter-spacing: -0.01em; }
+
+/* ── Help-close (closing sentence after scenarios) ── */
+.help-close {
+  font-size: 1rem;
+  color: var(--ink-mid);
+  line-height: 1.85;
+  max-width: 52ch;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Hero second sub-line ── */
+.hero-sub2 {
+  margin-top: 0.75rem;
+  color: var(--ink);
+  font-size: 1rem;
+}
 </style>
 </head>
 <body>
@@ -1234,10 +1304,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   </a>
 
   <nav class="hdr-nav" aria-label="Hoofdnavigatie">
-    <a href="#" onclick="goHome(event)" data-i18n="nav-home">Home</a>
+    <a href="#werkwijze" onclick="navTo(event, '#werkwijze')" data-i18n="nav-werk">Werk</a>
     <a href="#" onclick="goOver(event)" data-i18n="nav-over">Over Anica</a>
-    <a href="#visie" onclick="navTo(event, '#visie')" data-i18n="nav-visie">Visie</a>
-    <a href="#werkwijze" onclick="navTo(event, '#werkwijze')" data-i18n="nav-werkwijze">Werkwijze</a>
     <a href="#contact" onclick="navTo(event, '#contact')" data-i18n="nav-contact">Contact</a>
   </nav>
 
@@ -1256,10 +1324,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 
 <!-- ═══════════ MOBILE NAV ═══════════ -->
 <nav class="mob-nav" id="mob-nav" aria-label="Mobiel menu" aria-hidden="true">
-  <a href="#" onclick="closeMob(); goHome(event)" data-i18n="nav-home">Home</a>
+  <a href="#werkwijze" onclick="closeMob(); navTo(event,'#werkwijze')" data-i18n="nav-werk">Werk</a>
   <a href="#" onclick="closeMob(); goOver(event)" data-i18n="nav-over">Over Anica</a>
-  <a href="#visie" onclick="closeMob(); navTo(event,'#visie')" data-i18n="nav-visie">Visie</a>
-  <a href="#werkwijze" onclick="closeMob(); navTo(event,'#werkwijze')" data-i18n="nav-werkwijze">Werkwijze</a>
   <a href="#contact" onclick="closeMob(); navTo(event,'#contact')" data-i18n="nav-contact">Contact</a>
 </nav>
 
@@ -1275,7 +1341,10 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
         <span class="dim">Wel beter.</span>
       </h1>
       <p class="hero-sub reveal" style="transition-delay:.28s" data-i18n="hero-sub">
-        Goede zorg begint bij mensen. En bij de verbinding tussen ideeën, organisaties en de praktijk.
+        Complexe vraagstukken in de zorg vragen niet altijd om méér beleid, overleg of plannen. Wel om scherpte, verbinding en oplossingen die in de praktijk werken.
+      </p>
+      <p class="hero-sub hero-sub2 reveal" style="transition-delay:.42s" data-i18n="hero-sub2">
+        Ik help zorgorganisaties om beweging te krijgen waar inhoud, organisatie en mensen samenkomen.
       </p>
     </div>
 
@@ -1284,17 +1353,19 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     </div>
   </section>
 
-  <!-- TRIAD -->
-  <section class="triad" aria-label="Kernwaarden">
-    <div class="triad-grid">
-      <div class="triad-item reveal">
-        <p class="triad-word" data-i18n="triad-1">Mens.</p>
-      </div>
-      <div class="triad-item reveal" style="transition-delay:.14s">
-        <p class="triad-word" data-i18n="triad-2">Zorg.</p>
-      </div>
-      <div class="triad-item reveal" style="transition-delay:.28s">
-        <p class="triad-word" data-i18n="triad-3">Verbinding.</p>
+  <!-- INTRO POSITIONING -->
+  <section class="intro-pos" aria-labelledby="intro-pos-title">
+    <div class="intro-pos-inner">
+      <div class="reveal">
+        <h2 class="intro-pos-title" id="intro-pos-title" data-i18n="intro-title">Waar plannen<br>praktijk moeten worden.</h2>
+        <p class="intro-pos-lead" data-i18n="intro-lead">In de zorg zijn goede ideeën zelden het probleem. De uitdaging zit vaak in wat daarna komt.</p>
+        <ul class="intro-pos-qs" aria-label="Centrale vragen" data-i18n="intro-qs">
+          <li>Hoe organiseer je samenwerking?</li>
+          <li>Hoe vertaal je beleid naar de dagelijkse praktijk?</li>
+          <li>Hoe krijg je verschillende belangen bij elkaar?</li>
+          <li>En hoe zorg je dat een verandering niet alleen wordt bedacht, maar ook werkt?</li>
+        </ul>
+        <p class="intro-pos-body" data-i18n="intro-body">Ik breng structuur in complexe vraagstukken, verbind mensen en perspectieven en help organisaties om van plannen naar uitvoering te komen.</p>
       </div>
     </div>
   </section>
@@ -1304,15 +1375,15 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     <div class="over-snip-inner">
       <div class="over-snip-left reveal">
         <span class="eyebrow" data-i18n="over-snip-eyebrow">Over Anica</span>
-        <h2 class="over-snip-title" id="over-snip-title" data-i18n="over-snip-title">Waar mens en organisatie samenkomen.</h2>
+        <h2 class="over-snip-title" id="over-snip-title" data-i18n="over-snip-title">Werken op het snijvlak van inhoud, organisatie en mensen.</h2>
         <a href="#" class="text-link" onclick="goOver(event)" data-i18n="over-snip-link">Meer over Anica →</a>
       </div>
       <div class="reveal" style="transition-delay:.18s" data-i18n="over-snip-body-block">
         <p class="over-snip-body">
-          Ik ben psycholoog en ondernemer met een brede achtergrond in de zorg. Wat mij drijft, is de verbinding tussen mensen, organisaties en de dagelijkse praktijk.
+          Ik ben opgeleid als psycholoog en begon mijn loopbaan vanuit onderzoek, onderwijs en ontwikkeling binnen de zorg. Later verschoof mijn werk steeds meer naar organisatievraagstukken, samenwerking en projectleiding.
         </p>
         <p class="over-snip-body">
-          Niet alleen bedenken wat beter kan, maar helpen om daar daadwerkelijk iets van te maken.
+          Juist op dat snijvlak werk ik graag: waar inhoud, organisaties en mensen samenkomen — en waar goede ideeën moeten worden omgezet in iets dat daadwerkelijk werkt.
         </p>
       </div>
     </div>
@@ -1339,29 +1410,36 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <section class="werkwijze" id="werkwijze" aria-labelledby="wk-title">
     <div class="werkwijze-inner">
       <div class="werkwijze-hd">
-        <span class="eyebrow reveal" data-i18n="wk-eyebrow">Hoe ik werk</span>
-        <h2 class="werkwijze-title reveal" id="wk-title" style="transition-delay:.12s" data-i18n="wk-h2">Luisteren. Verbinden. Doen.</h2>
+        <span class="eyebrow reveal" data-i18n="wk-eyebrow">Wat ik doe</span>
+        <h2 class="werkwijze-title reveal" id="wk-title" style="transition-delay:.12s" data-i18n="wk-h2">Vier gebieden waar ik bij help.</h2>
       </div>
       <div class="wk-steps">
         <div class="wk-step reveal">
           <span class="wk-step-num">01</span>
           <div class="wk-step-body">
-            <h3 class="wk-step-title" data-i18n="wk-t1">Luisteren.</h3>
-            <p data-i18n="wk-p1">Goed kijken en begrijpen wat er speelt — vóórdat er oplossingen worden bedacht.</p>
+            <h3 class="wk-step-title" data-i18n="wk-t1">Procesbegeleiding</h3>
+            <p data-i18n="wk-p1">Wanneer verschillende organisaties, disciplines of belangen samen moeten komen, help ik om het proces helder te organiseren en beweging te creëren.</p>
           </div>
         </div>
-        <div class="wk-step reveal" style="transition-delay:.14s">
+        <div class="wk-step reveal" style="transition-delay:.1s">
           <span class="wk-step-num">02</span>
           <div class="wk-step-body">
-            <h3 class="wk-step-title" data-i18n="wk-t2">Verbinden.</h3>
-            <p data-i18n="wk-p2">Mensen, ideeën en organisaties bij elkaar brengen waar ze elkaar kunnen versterken.</p>
+            <h3 class="wk-step-title" data-i18n="wk-t2">Projectleiding</h3>
+            <p data-i18n="wk-p2">Van idee tot uitvoering. Ik help zorgprojecten structureren, organiseer besluitvorming en bewaak dat plannen daadwerkelijk worden uitgevoerd.</p>
           </div>
         </div>
-        <div class="wk-step reveal" style="transition-delay:.28s">
+        <div class="wk-step reveal" style="transition-delay:.2s">
           <span class="wk-step-num">03</span>
           <div class="wk-step-body">
-            <h3 class="wk-step-title" data-i18n="wk-t3">Doen.</h3>
-            <p data-i18n="wk-p3">Complexiteit terugbrengen tot iets concreets — wat willen we, wat is er nodig, wat doen we nu?</p>
+            <h3 class="wk-step-title" data-i18n="wk-t3">Organisatie &amp; verandering</h3>
+            <p data-i18n="wk-p3">Ik ondersteun organisaties bij veranderingen waarbij inhoud, processen en mensen elkaar raken — met aandacht voor zowel de bedoeling als de dagelijkse praktijk.</p>
+          </div>
+        </div>
+        <div class="wk-step reveal" style="transition-delay:.3s">
+          <span class="wk-step-num">04</span>
+          <div class="wk-step-body">
+            <h3 class="wk-step-title" data-i18n="wk-t4">Samenwerking in de zorg</h3>
+            <p data-i18n="wk-p4">Veel zorgvraagstukken stoppen niet bij de grenzen van één organisatie. Ik help partijen om gezamenlijke doelen concreet te maken en samenwerking werkbaar te organiseren.</p>
           </div>
         </div>
       </div>
@@ -1390,32 +1468,37 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     </div>
   </section>
 
-  <!-- WAAR IK BIJ HELP -->
+  <!-- WANNEER IK VAN WAARDE KAN ZIJN -->
   <section class="help" aria-labelledby="help-title">
     <div class="help-inner">
       <div class="help-hd reveal">
-        <span class="eyebrow" data-i18n="help-eyebrow">Waar ik bij help</span>
-        <h2 class="help-title" id="help-title" data-i18n="help-title">Waar plannen en praktijk elkaar moeten vinden.</h2>
-        <p class="help-intro" data-i18n="help-intro">Ik werk het liefst aan vraagstukken die complexer zijn dan ze lijken — waarbij mensen, organisatie en inhoud elkaar raken.</p>
+        <span class="eyebrow" data-i18n="help-eyebrow">Wanneer ik van waarde kan zijn</span>
+        <h2 class="help-title" id="help-title" data-i18n="help-title">Wanneer de uitvoering<br>achterblijft bij de bedoeling.</h2>
+        <p class="help-intro" data-i18n="help-intro">Vaak word ik betrokken wanneer een vraagstuk inhoudelijk duidelijk lijkt, maar de uitvoering vastloopt.</p>
       </div>
       <div class="help-list">
         <div class="help-item reveal">
-          <span class="help-n">01</span>
-          <p class="help-stmt" data-i18n="help-1">Vraagstukken die vragen om overzicht in complexe samenwerkingen.</p>
+          <span class="help-n">—</span>
+          <p class="help-stmt" data-i18n="help-1">Er ligt een goed plan, maar het komt niet verder.</p>
         </div>
         <div class="help-item reveal" style="transition-delay:.08s">
-          <span class="help-n">02</span>
-          <p class="help-stmt" data-i18n="help-2">Trajecten waarbij de menselijke kant net zo belangrijk is als de inhoud.</p>
+          <span class="help-n">—</span>
+          <p class="help-stmt" data-i18n="help-2">Verschillende organisaties moeten samenwerken, maar niemand heeft vanzelfsprekend de regie.</p>
         </div>
         <div class="help-item reveal" style="transition-delay:.16s">
-          <span class="help-n">03</span>
-          <p class="help-stmt" data-i18n="help-3">Projecten die vastlopen omdat de verbinding ontbreekt.</p>
+          <span class="help-n">—</span>
+          <p class="help-stmt" data-i18n="help-3">Een project vraagt tijdelijk om ervaren projectleiding.</p>
         </div>
         <div class="help-item reveal" style="transition-delay:.24s">
-          <span class="help-n">04</span>
-          <p class="help-stmt" data-i18n="help-4">Organisaties die willen bewegen, maar niet weten hoe.</p>
+          <span class="help-n">—</span>
+          <p class="help-stmt" data-i18n="help-4">Beleid moet worden vertaald naar iets dat professionals daadwerkelijk kunnen gebruiken.</p>
+        </div>
+        <div class="help-item reveal" style="transition-delay:.32s">
+          <span class="help-n">—</span>
+          <p class="help-stmt" data-i18n="help-5">Er zijn veel belangen en perspectieven, maar nog geen gezamenlijke richting.</p>
         </div>
       </div>
+      <p class="help-close reveal" style="transition-delay:.4s" data-i18n="help-close">Dan help ik om overzicht te creëren, keuzes concreet te maken en de volgende stap te organiseren.</p>
     </div>
   </section>
 
@@ -1429,7 +1512,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 
       <div class="opdracht-feature">
         <div class="opdracht-feature-text reveal">
-          <p class="opdracht-feature-body" data-i18n="opdracht-intro">Ik werk met organisaties die zorg, gezondheid en samenwerking in de praktijk verder willen brengen.</p>
+          <p class="opdracht-feature-body" data-i18n="opdracht-intro">Samenwerking in de zorg vraagt om meer dan goede bedoelingen. PlusWIJken is een van de organisaties waarmee ik aan concrete vraagstukken werk — van procesregie tot projectleiding.</p>
           <a
             href="https://www.pluswijken.nl/nieuws/even-voorstellen-anica-cruts"
             target="_blank"
@@ -1462,15 +1545,14 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     <div class="contact-inner">
       <div class="contact-left">
         <span class="eyebrow reveal" data-i18n="contact-eyebrow">Contact</span>
-        <h2 class="contact-title reveal" id="contact-title" style="transition-delay:.12s" data-i18n="contact-title">Soms begint iets<br>met een goed gesprek.</h2>
+        <h2 class="contact-title reveal" id="contact-title" style="transition-delay:.12s" data-i18n="contact-title">Even van gedachten<br>wisselen?</h2>
       </div>
       <div class="reveal" style="transition-delay:.22s">
-        <p class="contact-body" data-i18n="contact-body-pre">Geen uitgebreide intake nodig.</p>
-        <em class="contact-emphasis" data-i18n="contact-emphasis">Gewoon een gesprek.</em>
-        <p class="contact-body" data-i18n="contact-body-post">Over een idee, een vraag of iets wat speelt in jouw organisatie.</p>
-        <a href="mailto:anica@anica.care" class="contact-email">
-          anica@anica.care
+        <p class="contact-body" data-i18n="contact-body-pre">Heb je een vraagstuk waarbij beleid, organisatie en praktijk bij elkaar moeten komen? Ik denk graag een keer mee.</p>
+        <a href="mailto:anica@anica.care" class="contact-email" data-i18n="contact-cta">
+          Neem contact op →
         </a>
+        <em class="contact-emphasis" data-i18n="contact-emphasis">Geen uitgebreide intake. Gewoon een eerste gesprek.</em>
         <br>
         <a href="https://www.linkedin.com/in/anicaeurelings/" target="_blank" rel="noopener noreferrer" class="li-link" aria-label="LinkedIn profiel van Anica Eurelings">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
@@ -1724,57 +1806,63 @@ let currentLang = 'nl';
 const T = {
   nl: {
     /* ── nav ── */
-    'nav-home':       'Home',
+    'nav-werk':       'Werk',
     'nav-over':       'Over Anica',
-    'nav-visie':      'Visie',
-    'nav-werkwijze':  'Werkwijze',
     'nav-contact':    'Contact',
     'hdr-cta':        'Van gedachten wisselen',
     /* ── hero ── */
     'hero-eyebrow':   'Mens · Zorg · Verbinding',
     'hero-hl':        'Niet méér.<br><span class="dim">Wel beter.</span>',
-    'hero-sub':       'Goede zorg begint bij mensen. En bij de verbinding tussen ideeën, organisaties en de praktijk.',
+    'hero-sub':       'Complexe vraagstukken in de zorg vragen niet altijd om méér beleid, overleg of plannen. Wel om scherpte, verbinding en oplossingen die in de praktijk werken.',
+    'hero-sub2':      'Ik help zorgorganisaties om beweging te krijgen waar inhoud, organisatie en mensen samenkomen.',
     /* ── triad ── */
-    'triad-1': 'Mens.', 'triad-2': 'Zorg.', 'triad-3': 'Verbinding.',
+    'intro-title': 'Waar plannen<br>praktijk moeten worden.',
+    'intro-lead':  'In de zorg zijn goede ideeën zelden het probleem. De uitdaging zit vaak in wat daarna komt.',
+    'intro-qs':   '<li>Hoe organiseer je samenwerking?</li><li>Hoe vertaal je beleid naar de dagelijkse praktijk?</li><li>Hoe krijg je verschillende belangen bij elkaar?</li><li>En hoe zorg je dat een verandering niet alleen wordt bedacht, maar ook werkt?</li>',
+    'intro-body': 'Ik breng structuur in complexe vraagstukken, verbind mensen en perspectieven en help organisaties om van plannen naar uitvoering te komen.',
     /* ── over snippet ── */
     'over-snip-eyebrow': 'Over Anica',
-    'over-snip-title':   'Waar mens en organisatie samenkomen.',
+    'over-snip-title':   'Werken op het snijvlak van inhoud, organisatie en mensen.',
     'over-snip-link':    'Meer over Anica →',
-    'over-snip-body-block': '<p class="over-snip-body">Ik ben psycholoog en ondernemer met een brede achtergrond in de zorg. Wat mij drijft, is de verbinding tussen mensen, organisaties en de dagelijkse praktijk.</p><p class="over-snip-body">Niet alleen bedenken wat beter kan, maar helpen om daar daadwerkelijk iets van te maken.</p>',
+    'over-snip-body-block': '<p class="over-snip-body">Ik ben opgeleid als psycholoog en begon mijn loopbaan vanuit onderzoek, onderwijs en ontwikkeling binnen de zorg. Later verschoof mijn werk steeds meer naar organisatievraagstukken, samenwerking en projectleiding.</p><p class="over-snip-body">Juist op dat snijvlak werk ik graag: waar inhoud, organisaties en mensen samenkomen — en waar goede ideeën moeten worden omgezet in iets dat daadwerkelijk werkt.</p>',
     /* ── visie ── */
     'visie-eyebrow': 'Mijn visie',
     'visie-stmt':    '"Goede verandering begint niet met méér plannen, maar met begrijpen wat er werkelijk nodig is."',
     /* ── werkwijze ── */
-    'wk-eyebrow':  'Hoe ik werk',
-    'wk-h2':       'Luisteren. Verbinden. Doen.',
-    'wk-t1': 'Luisteren.', 'wk-p1': 'Goed kijken en begrijpen wat er speelt — vóórdat er oplossingen worden bedacht.',
-    'wk-t2': 'Verbinden.', 'wk-p2': 'Mensen, ideeën en organisaties bij elkaar brengen waar ze elkaar kunnen versterken.',
-    'wk-t3': 'Doen.',      'wk-p3': 'Complexiteit terugbrengen tot iets concreets — wat willen we, wat is er nodig, wat doen we nu?',
+    'wk-eyebrow':  'Wat ik doe',
+    'wk-h2':       'Vier gebieden waar ik bij help.',
+    'wk-t1': 'Procesbegeleiding', 'wk-p1': 'Wanneer verschillende organisaties, disciplines of belangen samen moeten komen, help ik om het proces helder te organiseren en beweging te creëren.',
+    'wk-t2': 'Projectleiding', 'wk-p2': 'Van idee tot uitvoering. Ik help zorgprojecten structureren, organiseer besluitvorming en bewaak dat plannen daadwerkelijk worden uitgevoerd.',
+    'wk-t3': 'Organisatie & verandering', 'wk-p3': 'Ik ondersteun organisaties bij veranderingen waarbij inhoud, processen en mensen elkaar raken — met aandacht voor zowel de bedoeling als de dagelijkse praktijk.',
+    'wk-t4': 'Samenwerking in de zorg', 'wk-p4': 'Veel zorgvraagstukken stoppen niet bij de grenzen van één organisatie. Ik help partijen om gezamenlijke doelen concreet te maken en samenwerking werkbaar te organiseren.',
     /* ── achter ── */
     'achter-eyebrow': 'Achtergrond',
     'achter-title':   'De zorg kennen vanuit verschillende perspectieven.',
     'achter-body':    'Van onderzoek, onderwijs en ontwikkeling tot ondernemerschap, projectmanagement en samenwerking. Die brede achtergrond helpt mij om vraagstukken vanuit meerdere kanten te bekijken — zonder de praktijk uit het oog te verliezen.',
     'achter-link':    'Meer over Anica →',
     /* ── waar ik bij help ── */
-    'help-eyebrow': 'Waar ik bij help',
-    'help-title':   'Waar plannen en praktijk elkaar moeten vinden.',
-    'help-intro':   'Ik werk het liefst aan vraagstukken die complexer zijn dan ze lijken — waarbij mensen, organisatie en inhoud elkaar raken.',
-    'help-1': 'Vraagstukken die vragen om overzicht in complexe samenwerkingen.',
-    'help-2': 'Trajecten waarbij de menselijke kant net zo belangrijk is als de inhoud.',
-    'help-3': 'Projecten die vastlopen omdat de verbinding ontbreekt.',
-    'help-4': 'Organisaties die willen bewegen, maar niet weten hoe.',
+    'help-eyebrow': 'Wanneer ik van waarde kan zijn',
+    'help-title':   'Wanneer de uitvoering<br>achterblijft bij de bedoeling.',
+    'help-intro':   'Vaak word ik betrokken wanneer een vraagstuk inhoudelijk duidelijk lijkt, maar de uitvoering vastloopt.',
+    'help-1': 'Er ligt een goed plan, maar het komt niet verder.',
+    'help-2': 'Verschillende organisaties moeten samenwerken, maar niemand heeft vanzelfsprekend de regie.',
+    'help-3': 'Een project vraagt tijdelijk om ervaren projectleiding.',
+    'help-4': 'Beleid moet worden vertaald naar iets dat professionals daadwerkelijk kunnen gebruiken.',
+    'help-5': 'Er zijn veel belangen en perspectieven, maar nog geen gezamenlijke richting.',
+    'help-close': 'Dan help ik om overzicht te creëren, keuzes concreet te maken en de volgende stap te organiseren.',
     /* ── opdrachtgevers ── */
     'opdracht-eyebrow':          'Opdrachtgevers & samenwerkingen',
     'opdracht-title':            'Samen werken aan zorg die beweegt.',
-    'opdracht-intro':            'Ik werk met organisaties die zorg, gezondheid en samenwerking in de praktijk verder willen brengen.',
+    'opdracht-intro':            'Samenwerking in de zorg vraagt om meer dan goede bedoelingen. PlusWIJken is een van de organisaties waarmee ik aan concrete vraagstukken werk — van procesregie tot projectleiding.',
     'opdracht-pluswijken-role':  'Procesbegeleiding & projectleiding zorg',
     'opdracht-pluswijken-link':  'Bekijk de samenwerking →',
     /* ── contact (main) ── */
     'contact-eyebrow':    'Contact',
-    'contact-title':      'Soms begint iets<br>met een goed gesprek.',
-    'contact-body-pre':   'Geen uitgebreide intake nodig.',
-    'contact-emphasis':   'Gewoon een gesprek.',
-    'contact-body-post':  'Over een idee, een vraag of iets wat speelt in jouw organisatie.',
+    'contact-title':      'Even van gedachten<br>wisselen?',
+    'contact-cta':        'Neem contact op →',
+    'contact-body-pre':   'Heb je een vraagstuk waarbij beleid, organisatie en praktijk bij elkaar moeten komen? Ik denk graag een keer mee.',
+    'contact-emphasis':   'Geen uitgebreide intake. Gewoon een eerste gesprek.',
+
     /* ── footer ── */
     'ftr-tag': 'Mens · Zorg · Verbinding',
     /* ── over-page ── */
@@ -1793,57 +1881,63 @@ const T = {
   },
   en: {
     /* ── nav ── */
-    'nav-home':       'Home',
+    'nav-werk':       'Work',
     'nav-over':       'About Anica',
-    'nav-visie':      'Vision',
-    'nav-werkwijze':  'Approach',
     'nav-contact':    'Contact',
     'hdr-cta':        "Let's talk",
     /* ── hero ── */
     'hero-eyebrow':   'People · Care · Connection',
     'hero-hl':        'Not more.<br><span class="dim">Better.</span>',
-    'hero-sub':       'Good care starts with people. And with the connection between ideas, organisations, and daily practice.',
+    'hero-sub':       'Complex questions in healthcare don\'t always call for more policy, meetings, or plans. They call for clarity, connection, and solutions that actually work in practice.',
+    'hero-sub2':      'I help healthcare organisations get things moving where content, organisation, and people come together.',
     /* ── triad ── */
-    'triad-1': 'People.', 'triad-2': 'Care.', 'triad-3': 'Connection.',
+    'intro-title': 'Where plans must<br>become practice.',
+    'intro-lead':  'Good ideas are rarely the problem in healthcare. The challenge is often what comes next.',
+    'intro-qs':   '<li>How do you organise collaboration?</li><li>How do you translate policy into daily practice?</li><li>How do you align different interests?</li><li>And how do you ensure a change is not just designed, but actually works?</li>',
+    'intro-body': 'I bring structure to complex questions, connect people and perspectives, and help organisations move from plans to execution.',
     /* ── over snippet ── */
     'over-snip-eyebrow': 'About Anica',
-    'over-snip-title':   'Where people and organisations meet.',
+    'over-snip-title':   'Working at the intersection of content, organisation, and people.',
     'over-snip-link':    'More about Anica →',
-    'over-snip-body-block': '<p class="over-snip-body">I am a psychologist and entrepreneur with a broad background in healthcare. What drives me is the connection between people, organisations, and daily practice.</p><p class="over-snip-body">Not just thinking about what could be better, but actually helping to make it happen.</p>',
+    'over-snip-body-block': '<p class="over-snip-body">I trained as a psychologist and started my career in research, education, and development in healthcare. Over time, my work shifted towards organisational questions, collaboration, and project leadership.</p><p class="over-snip-body">That intersection is where I do my best work: where content, organisations, and people come together — and where good ideas must be turned into something that actually works.</p>',
     /* ── visie ── */
     'visie-eyebrow': 'My vision',
     'visie-stmt':    '"Good change does not begin with more plans, but with understanding what is truly needed."',
     /* ── werkwijze ── */
-    'wk-eyebrow':  'How I work',
-    'wk-h2':       'Listen. Connect. Act.',
-    'wk-t1': 'Listen.',   'wk-p1': 'Looking carefully and understanding what is happening — before solutions are designed.',
-    'wk-t2': 'Connect.',  'wk-p2': 'Bringing people, ideas, and organisations together where they can strengthen each other.',
-    'wk-t3': 'Act.',      'wk-p3': 'Reducing complexity to something concrete — what do we want, what is needed, what do we do now?',
+    'wk-eyebrow':  'What I do',
+    'wk-h2':       'Four areas where I can help.',
+    'wk-t1': 'Process facilitation', 'wk-p1': 'When different organisations, disciplines, or interests need to come together, I help clarify the process and create momentum.',
+    'wk-t2': 'Project leadership', 'wk-p2': 'From idea to execution. I help structure healthcare projects, organise decision-making, and make sure plans actually get implemented.',
+    'wk-t3': 'Organisation & change', 'wk-p3': 'I support organisations through change where content, processes, and people intersect — with attention to both the intent and the daily reality.',
+    'wk-t4': 'Collaboration in healthcare', 'wk-p4': 'Many healthcare questions do not stop at the boundaries of one organisation. I help parties make shared goals concrete and organise collaboration in a workable way.',
     /* ── achter ── */
     'achter-eyebrow': 'Background',
     'achter-title':   'Knowing healthcare from multiple perspectives.',
     'achter-body':    'From research, education, and development to entrepreneurship, project management, and collaboration. That broad background helps me look at issues from multiple angles — without losing sight of practice.',
     'achter-link':    'More about Anica →',
     /* ── waar ik bij help ── */
-    'help-eyebrow': 'Where I can help',
-    'help-title':   'Where plans and practice need to meet.',
-    'help-intro':   'I work best on challenges that are more complex than they seem — where people, organisation, and content intersect.',
-    'help-1': 'Questions that call for overview in complex collaborations.',
-    'help-2': 'Trajectories where the human side matters as much as the content.',
-    'help-3': 'Projects that stall because the connection is missing.',
-    'help-4': "Organisations that want to move forward, but don't know how.",
+    'help-eyebrow': 'When I can add value',
+    'help-title':   'When execution falls short<br>of intention.',
+    'help-intro':   'I am often brought in when a question seems clear in principle, but implementation has stalled.',
+    'help-1': 'There is a good plan, but it is not moving forward.',
+    'help-2': 'Multiple organisations need to collaborate, but no one has obvious authority.',
+    'help-3': 'A project temporarily needs experienced project leadership.',
+    'help-4': "Policy needs to be translated into something professionals can actually use.",
+    'help-5': 'There are many interests and perspectives, but no shared direction yet.',
+    'help-close': 'Then I help create overview, make choices concrete, and organise the next step.',
     /* ── opdrachtgevers ── */
     'opdracht-eyebrow':          'Clients & collaborations',
     'opdracht-title':            'Working together toward healthcare that moves.',
-    'opdracht-intro':            'I work with organisations that want to advance care, health, and collaboration in practice.',
+    'opdracht-intro':            'Collaboration in healthcare requires more than good intentions. PlusWIJken is one of the organisations I work with on concrete questions — from process facilitation to project leadership.',
     'opdracht-pluswijken-role':  'Process facilitation & project management in care',
     'opdracht-pluswijken-link':  'View the collaboration →',
     /* ── contact (main) ── */
     'contact-eyebrow':    'Contact',
-    'contact-title':      'Sometimes things start<br>with a good conversation.',
-    'contact-body-pre':   'No extensive intake needed.',
-    'contact-emphasis':   'Just a conversation.',
-    'contact-body-post':  'About an idea, a question, or something happening in your organisation.',
+    'contact-title':      'Want to exchange<br>ideas?',
+    'contact-cta':        'Get in touch →',
+    'contact-body-pre':   'Do you have a question where policy, organisation, and practice need to come together? I\'m happy to think it through with you.',
+    'contact-emphasis':   'No extensive intake. Just a first conversation.',
+
     /* ── footer ── */
     'ftr-tag': 'People · Care · Connection',
     /* ── over-page ── */
