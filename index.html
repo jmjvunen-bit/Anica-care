@@ -1105,6 +1105,7 @@ button { cursor: pointer; }
   gap: 0.375rem;
   margin-right: 0.125rem;
 }
+.lang-switcher { display: flex; gap: 0.25rem; }
 .util-btn {
   background: none;
   border: 1px solid var(--rule-mid);
@@ -1312,7 +1313,11 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <a class="hdr-cta" href="#contact" onclick="navTo(event, '#contact')" data-i18n="hdr-cta">Van gedachten wisselen</a>
 
   <div class="hdr-utils">
-    <button class="util-btn" id="lang-btn" aria-pressed="false" onclick="toggleLang()" aria-label="Switch to English">EN</button>
+    <div class="lang-switcher" role="group" aria-label="Taal kiezen">
+      <button class="util-btn lang-opt" id="lang-nl" aria-pressed="true" onclick="setLang('nl')">NL</button>
+      <button class="util-btn lang-opt" id="lang-en" aria-pressed="false" onclick="setLang('en')">EN</button>
+      <button class="util-btn lang-opt" id="lang-lb" aria-pressed="false" onclick="setLang('lb')" title="Limburgs dialek">LB</button>
+    </div>
     <button class="util-btn" id="dark-btn" aria-pressed="false" onclick="toggleDark()" aria-label="Donkere modus">◑</button>
   </div>
 
@@ -1800,7 +1805,11 @@ function toggleDark() {
 })();
 
 /* ─── Language toggle NL / EN ─── */
-const langBtn = document.getElementById('lang-btn');
+const langBtns = {
+  nl: document.getElementById('lang-nl'),
+  en: document.getElementById('lang-en'),
+  lb: document.getElementById('lang-lb')
+};
 let currentLang = 'nl';
 
 const T = {
@@ -1953,15 +1962,89 @@ const T = {
     'sec-werkwijze-body':  '<p>I listen carefully, draw connections quickly, and often see where people, ideas, or organisations can strengthen each other. If I think people have something to offer each other, I am happy to introduce them.</p><p>At the same time I am very practically minded. I enjoy reducing complex issues to something concrete:</p><ul class="dash-list"><li>What do we want to achieve?</li><li>What is needed for that?</li><li>Who do we need?</li><li>What can we start doing now?</li></ul><p>I work with commitment and a human focus, but also with clarity, pace, and an eye on results. Ultimately, I get most energy from the moment a conversation, plan, or idea truly starts to move.</p>',
     'over-contact-title':  'Sometimes things start<br>with a good conversation.',
     'over-contact-body':   'No extensive intake needed. Just a conversation — about an idea, a question, or something happening in your organisation.',
+  },
+  lb: {
+    /* ── nav ── */
+    'nav-werk':       'Werk',
+    'nav-over':       'Euver Anica',
+    'nav-contact':    'Contact',
+    'hdr-cta':        'Even klappeche',
+    /* ── hero ── */
+    'hero-eyebrow':   'Meense · Zörg · Verbinding',
+    'hero-hl':        'Neet méér.<br><span class=\"dim\">Weul beter.</span>',
+    'hero-sub':       'Ingewikkelde vraogstukke in de zörg vraoge neet altied um méér beleid, euverleg of planne. Weul um sjerpte, verbinding en oplossinges dae in de praktiek werke.',
+    'hero-sub2':      'Ich help zörgorganisasies um beweging te kriege waor inhoud, organisasie en meense saomekómme.',
+    /* ── triad ── */
+    'intro-title': 'Waor planne<br>praktiek mótte weure.',
+    'intro-lead':  'In de zörg zien goei ideeë zelle het probleem neet. De uutdaging zit vaakser in wèt dao nao kump.',
+    'intro-qs':   '<li>Hoe organiseer ich de saomeswerking?</li><li>Hoe vertaal ich beleid nao de daagelijkse praktiek?</li><li>Hoe kriege ich de versjeie belange bie mekaar?</li><li>En hoe zörg ich dèt ene verandering neet allein weur bedach, mer ouch werkt?</li>',
+    'intro-body': 'Ich brèng structuur in ingewikkelde vraogstukke, verbind meense en perspectieven en help organisasies um van planne nao uutvoering te kómme.',
+    /* ── over snippet ── */
+    'over-snip-eyebrow': 'Euver Anica',
+    'over-snip-title':   'Werke op \u2019t snijvlak vaan inhoud, organisasie en meense.',
+    'over-snip-link':    'Mieë euver Anica →',
+    'over-snip-body-block': '<p class=\"over-snip-body\">Ich bön opgeleid es psycholoog en bön begónne vanuut óngerzoek, óngerwiese en óntwikkeling in de zörg. Laote r verschoof mien werk stieëds mieë nao organisasievraogstukke, saomeswerking en projectleiding.</p><p class=\"over-snip-body\">Juust op dèt snijvlak werk ich geere: waor inhoud, organisasies en meense saomekómme — en waor goei ideeë mótte weure umgezet in ès dèt daadwerkelijk werkt.</p>',
+    /* ── visie ── */
+    'visie-eyebrow': 'Mien visie',
+    'visie-stmt':    '\"Goei verandering begint neet mit méér planne, mer mit begriepe wèt ter werkelijk neudig is.\"',
+    /* ── werkwijze ── */
+    'wk-eyebrow':  'Wèt ich doe',
+    'wk-h2':       'Vier gebiede waor ich bie help.',
+    'wk-t1': 'Procesbegeleiding', 'wk-p1': 'Wie versjeie organisasies, disciplines of belange saome mótte kómme, help ich um \u2019t proces duidelijk te organisere en beweging te maake.',
+    'wk-t2': 'Projectleiding', 'wk-p2': 'Vaan idee tot uutvoering. Ich help zörgprojecte structurere, organiseer beslisvorming en wake dèt planne daadwerkelijk weure uutgevoerd.',
+    'wk-t3': 'Organisasie & verandering', 'wk-p3': 'Ich óngersteun organisasies bie veranderinge waorbie inhoud, processe en meense mekaar rake — mit aandach veur zowel de bédoeling es de daagelijkse praktiek.',
+    'wk-t4': 'Saomeswerking in de zörg', 'wk-p4': 'Vöal zörgvraogstukke stóppe neet bie de grense vaan eine organisasie. Ich help partijen um gezamenlijke doele concreet te maake en saomeswerking werkbaar te organisere.',
+    /* ── achter ── */
+    'achter-eyebrow': 'Achtergrond',
+    'achter-title':   'De zörg kenne vanuut versjeie perspectieven.',
+    'achter-body':    'Vaan óngerzoek, óngerwiese en óntwikkeling tot óngernemerschap, projectmanagement en saomeswerking. Dae breeje achtergrond help mich um vraogstukke vanuut mieje kante te bekieke — zónger de praktiek uut \u2019t oog te verlieze.',
+    'achter-link':    'Mieë euver Anica →',
+    /* ── waar ik bij help ── */
+    'help-eyebrow': 'Wie ich vaan waarde zien kan',
+    'help-title':   'Wie de uutvoering<br>achterblieft bie de bédoeling.',
+    'help-intro':   'Vaakser weur ich erbij gehaold wie \u2019ne vraogstuk inhoudelijk duidelijk likt, mer de uutvoering vasteleupt.',
+    'help-1': 'D\u2019r ligt \u2019n good plan, mer \u2019t kump neet vörder.',
+    'help-2': 'Versjeie organisasies mótte saomeswerke, mer nemes hef vanzelfsprekend de regie.',
+    'help-3': '\u2019N project vraog tiedelijk um ervare projectleiding.',
+    'help-4': 'Beleid mót weure vertaald nao ès dèt professionals daadwerkelijk gebruike kónne.',
+    'help-5': 'D\u2019r zien vöal belange en perspectieven, mer nog gein gezamenlijke richting.',
+    'help-close': 'Dan help ich um euverzich te creëre, keuzes concreet te maake en de vólgende stap te organisere.',
+    /* ── opdrachtgevers ── */
+    'opdracht-eyebrow':          'Opdrachtgevers & saomewerkinge',
+    'opdracht-title':            'Saome werke aan zörg die bewegt.',
+    'opdracht-intro':            'Saomeswerking in de zörg vraog um mieë dan goei bédoelinge. PlusWIJken is ein vaan de organisasies waarmee ich aan concrete vraogstukke werk — vaan procesregie tot projectleiding.',
+    'opdracht-pluswijken-role':  'Procesbegeleiding & projectleiding zörg',
+    'opdracht-pluswijken-link':  'Bekiek de saomeswerking →',
+    /* ── contact (main) ── */
+    'contact-eyebrow':    'Contact',
+    'contact-title':      'Even klappeche?',
+    'contact-cta':        'Neem contact op →',
+    'contact-body-pre':   'Häste \u2019n vraogstuk waorbie beleid, organisasie en praktiek bie mekaar mótte kómme? Ich klappe \u2019t geere ein kier mit dich door.',
+    'contact-emphasis':   'Gein greut intakegesprek. Gewoen ein eerste klappe.',
+    /* ── footer ── */
+    'ftr-tag': 'Meense · Zörg · Verbinding',
+    /* ── over-page ── */
+    'over-hero-eyebrow': 'Euver Anica',
+    'over-hl': 'Psycholoog.<br>Óngerneemster.<br>Tösje meense<br>en organisasie.',
+    'sec-verhaal-label': 'Persoonlijk<br>verhaal',
+    'sec-verhaal-body':  '<p>Wèt mich altied hef geboeid in de zörg, is de kombinasie vaan meens en organisasie. Achter eder plan, proces of verandertraject zit uiteindelijk \u2019n daagelijkse werkelijkheid waorin meense huun werk doen mótte en zörg kriege mótte dae bie huun past.</p><blockquote class=\"pull-quote\">Achter eder plan, proces of verandertraject zit uiteindelijk \u2019n daagelijkse werkelijkheid.</blockquote><p>Neet allein bedenke wèt beter kan, mer veureal helpe um dao ouch daadwerkelijk ès vaan te maake.</p>',
+    'sec-achter-label':  'Achtergrond',
+    'sec-achter-body':   '<p>Ich bön opgeleid es psycholoog en bön begónne mit werk op \u2019t gebieed vaan óngerzoek, óngerwiese en óntwikkeling in de zörg.</p><p>Laote r verschoof mien werk stieëds mieë richting de organisasie vaan zörg. Ich waor jaore lang mede-eignares vaan \u2019n zörgóngerneming en leerde de zörg dao door ouch vaan binnenöt kinne — mit alles wèt dao bie kumt op \u2019t gebieed vaan meense, saomeswerking, bedriefsvuering en keuzes maake.</p><p>Mien ervaoring leupt eutrein vaan projectmanagement en multidisciplinaire saomeswerking tot productontwikkeling, subsidies, personeel en contractering. Dae breeje achtergrond help mich um vraogstukke vanuut mieje kante te bekieke en altied de verbinding te houde mit de praktiek.</p>',
+    'sec-visie-label':   'Mien visie',
+    'sec-visie-body':    '<p>Ich geluuf dèt goei veranderinge in de zörg neet beginne bie méér structuren, planne of euverlègge, mer bie good begriepe wèt neudig is.</p><blockquote class=\"pull-quote\">En good idee hef pas waarde es \u2019t ouch uutvoerbaar is.</blockquote><p>Dao d\u2019rum vink ich de verbinding tösje beleid en praktiek essentieel. Soms vraog dèt um ès nieëwes, mer minste zovöal um beter gebruuk te maake vaan wèt d\u2019r al is — neet ingewikkelder dan neudig.</p>',
+    'sec-werkwijze-label': 'Mien manier<br>vaan werke',
+    'sec-werkwijze-body':  '<p>Ich lustert good, leg snel verbande en zie vaakser waor meense, ideeë of organisasies mekaar versterke kónne. Es ich denk dèt meense ès aan mekaar häbbe, brèng ich ze geere mit mekaar in contact.</p><p>Tégelijkertied bön ich heel praktisch ingesteld. Ich hol d\u2019r vaan um ingewikkelde vraogstukke trög te brèngge tot ès concreets:</p><ul class=\"dash-list\"><li>Wèt wille veer bereike?</li><li>Wèt is dao veur neudig?</li><li>Wie häbbe veer neudig?</li><li>Wèt kónne veer noe gao doen?</li></ul><p>Ich werk betrokke en meensgericht, mer ouch mit duidelijkheid, tempo en focus op resultaat. Uiteindelijk krie ich de meiste energie vaan \u2019t moment waorop \u2019n gesprek, plan of idee ouch echt in beweging kump.</p>',
+    'over-contact-title':  'Soms begint ès<br>mit \u2019n good gesprek.',
+    'over-contact-body':   'Gein greut intakegesprek neudig. Gewoen \u2019n klappe — euver \u2019n idee, \u2019n vraog of ès dèt speelt in dien organisasie.',
   }
 };
 
 function setLang(lang) {
   currentLang = lang;
-  langBtn.textContent = lang === 'nl' ? 'EN' : 'NL';
-  langBtn.setAttribute('aria-pressed', String(lang === 'en'));
-  langBtn.setAttribute('aria-label', lang === 'nl' ? 'Switch to English' : 'Naar Nederlandse versie');
-  document.documentElement.lang = lang;
+  Object.entries(langBtns).forEach(([l, btn]) => {
+    if (btn) btn.setAttribute('aria-pressed', String(l === lang));
+  });
+  document.documentElement.lang = lang === 'lb' ? 'nl' : lang;
   const t = T[lang];
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
@@ -1969,11 +2052,13 @@ function setLang(lang) {
   });
   try { localStorage.setItem('lang', lang); } catch(e) {}
 }
-function toggleLang() { setLang(currentLang === 'nl' ? 'en' : 'nl'); }
+function toggleLang() {
+  setLang(currentLang === 'nl' ? 'en' : currentLang === 'en' ? 'lb' : 'nl');
+}
 (function() {
   try {
     const savedLang = localStorage.getItem('lang');
-    if (savedLang === 'en') setLang('en');
+    if (savedLang === 'en' || savedLang === 'lb') setLang(savedLang);
   } catch(e) {}
 })();
 </script>
