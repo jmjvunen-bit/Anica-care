@@ -1,0 +1,10 @@
+# Redirect www to apex
+https://www.anica.care/* https://anica.care/:splat 301!
+
+# Clean URLs voor subpagina's (Netlify serveert /privacy/index.html al als /privacy)
+/privacy                  /privacy/index.html                   200
+/disclaimer               /disclaimer/index.html                200
+/algemene-voorwaarden     /algemene-voorwaarden/index.html      200
+
+# Friendly 404
+/*    /404.html   404

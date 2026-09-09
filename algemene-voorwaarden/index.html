@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algemene Voorwaarden — Anica.care</title>
+<meta name="description" content="Algemene voorwaarden van anica.care — duidelijke afspraken voor een goede samenwerking.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://anica.care/algemene-voorwaarden">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════ */
+:root {
+  --bg:       #FAF7F4;
+  --bg-alt:   #F3EDE6;
+  --ink:      #2D1506;
+  --ink-mid:  #5C3D22;
+  --ink-soft: #9A7E6A;
+  --klei:     #87674E;
+  --taupe:    #B09A84;
+  --rule:     rgba(100,65,40,0.13);
+  --rule-mid: rgba(100,65,40,0.22);
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+  --max:   1280px;
+  --pad:   2.5rem;
+  --pad-sm:1.25rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:       #1A0E07; --bg-alt:   #241507;
+    --ink:      #F0E6DA; --ink-mid:  #C4A888; --ink-soft: #7A6050;
+    --klei:     #C49A78; --taupe:    #8A7060;
+    --rule:     rgba(200,165,130,0.10); --rule-mid: rgba(200,165,130,0.18);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:       #1A0E07; --bg-alt:   #241507;
+  --ink:      #F0E6DA; --ink-mid:  #C4A888; --ink-soft: #7A6050;
+  --klei:     #C49A78; --taupe:    #8A7060;
+  --rule:     rgba(200,165,130,0.10); --rule-mid: rgba(200,165,130,0.18);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #FAF7F4; --bg-alt: #F3EDE6;
+  --ink: #2D1506; --ink-mid: #5C3D22; --ink-soft: #9A7E6A;
+  --klei: #87674E; --taupe: #B09A84;
+  --rule: rgba(100,65,40,0.13); --rule-mid: rgba(100,65,40,0.22);
+  color-scheme: light;
+}
+
+/* ═══════════════════════════════════════
+   RESET
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+.hdr {
+  position: fixed; inset-block-start: 0; inset-inline: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.125rem var(--pad);
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.35s, background 0.35s;
+}
+.hdr.is-scrolled { border-color: var(--rule); }
+.hdr-brand {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-family: var(--serif); font-size: 1.0625rem; font-style: italic; font-weight: 400;
+  color: var(--ink); letter-spacing: 0.025em;
+}
+.ac-mark { width: 30px; height: 30px; flex-shrink: 0; color: var(--ink); }
+.hdr-nav { display: flex; align-items: center; gap: 2.25rem; }
+.hdr-nav a {
+  font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.04em;
+  color: var(--ink-mid); position: relative; padding-bottom: 2px; transition: color 0.2s;
+}
+.hdr-nav a::after {
+  content: ''; position: absolute; inset-block-end: 0; inset-inline-start: 0;
+  width: 100%; height: 1px; background: var(--klei);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.28s ease;
+}
+.hdr-nav a:hover { color: var(--ink); }
+.hdr-nav a:hover::after { transform: scaleX(1); }
+.hdr-cta {
+  font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.05em;
+  color: var(--ink-mid); border: 1px solid var(--rule-mid); padding: 0.45rem 1.125rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hdr-cta:hover { color: var(--ink); border-color: var(--klei); }
+.hdr-utils { display: flex; align-items: center; gap: 0.375rem; margin-right: 0.125rem; }
+.util-btn {
+  background: none; border: 1px solid var(--rule-mid); color: var(--ink-soft);
+  font-family: var(--sans); font-size: 0.5625rem; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 0 0.5rem; height: 30px; min-width: 44px; min-height: 44px;
+  cursor: pointer; transition: color 0.2s, border-color 0.2s;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.util-btn:hover { color: var(--ink); border-color: var(--taupe); }
+.util-btn[aria-pressed="true"] { color: var(--ink); border-color: var(--klei); }
+.burger {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  gap: 5px; background: none; border: none; min-width: 44px; min-height: 44px; padding: 0; color: var(--ink);
+}
+.burger span { display: block; width: 22px; height: 1.5px; background: currentColor; transition: transform 0.28s ease, opacity 0.2s; }
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mob-nav {
+  position: fixed; inset: 0; z-index: 190; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.25rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.mob-nav.open { opacity: 1; pointer-events: auto; }
+.mob-nav a { font-family: var(--serif); font-size: 2rem; font-style: italic; color: var(--ink-mid); transition: color 0.2s; }
+.mob-nav a:hover { color: var(--ink); }
+
+/* ═══════════════════════════════════════
+   LEGAL PAGE LAYOUT
+═══════════════════════════════════════ */
+.legal-hero {
+  padding: 8rem var(--pad) 4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.legal-hero-inner { max-width: var(--max); margin-inline: auto; }
+.legal-ac {
+  display: block; font-family: var(--serif); font-size: 0.875rem; font-style: italic;
+  color: var(--taupe); margin-bottom: 1.25rem; opacity: 0.8;
+}
+.legal-title {
+  font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300; font-style: italic; line-height: 1.05; color: var(--ink); margin-bottom: 1rem;
+}
+.legal-sub {
+  font-family: var(--serif); font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 300; font-style: italic; color: var(--ink-mid); max-width: 52ch;
+}
+.legal-meta {
+  margin-top: 1.5rem; font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.06em;
+}
+
+.legal-body { padding: 5rem var(--pad) 6rem; }
+.legal-body-inner { max-width: 780px; margin-inline: auto; }
+
+/* Intro block */
+.legal-intro {
+  margin-bottom: 3.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.legal-intro p {
+  font-size: 1.0rem; line-height: 1.85; color: var(--ink-mid); margin-bottom: 1em;
+}
+.legal-intro p:last-child { margin-bottom: 0; }
+
+/* Download button */
+.pdf-btn {
+  display: inline-flex; align-items: center; gap: 0.625rem;
+  margin-top: 1.75rem;
+  font-family: var(--sans); font-size: 0.75rem; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft);
+  border: 1px solid var(--rule-mid); padding: 0.6rem 1.1rem;
+  background: none; cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.pdf-btn:hover { color: var(--klei); border-color: var(--klei); }
+.pdf-btn svg { flex-shrink: 0; }
+
+/* Article */
+.av-article {
+  margin-bottom: 3rem;
+}
+.av-article-title {
+  font-family: var(--serif); font-size: 1.125rem; font-weight: 500;
+  color: var(--ink); margin-bottom: 0.875rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
+  letter-spacing: 0.01em;
+}
+.av-p {
+  font-size: 1rem; line-height: 1.85; color: var(--ink-mid); margin-bottom: 0.875em;
+}
+.av-p:last-child { margin-bottom: 0; }
+.av-p a { color: var(--klei); border-bottom: 1px solid var(--rule-mid); transition: border-color 0.2s; }
+.av-p a:hover { border-color: var(--klei); }
+
+/* Numbered list inside articles */
+.av-list {
+  list-style: none; display: flex; flex-direction: column; gap: 0.75rem;
+  margin: 0.5rem 0 0.875rem;
+}
+.av-list li {
+  display: grid; grid-template-columns: 1.5rem 1fr;
+  gap: 0.75rem; font-size: 1rem; line-height: 1.8; color: var(--ink-mid);
+}
+.av-list li .n {
+  font-family: var(--serif); font-size: 0.875rem; font-style: italic;
+  color: var(--taupe); padding-top: 0.1em;
+}
+
+/* Verification note */
+.av-verify {
+  display: inline-flex; align-items: flex-start; gap: 0.75rem;
+  background: var(--bg-alt); border: 1px solid var(--rule-mid);
+  padding: 1rem 1.25rem; margin: 1rem 0;
+  font-size: 0.8125rem; line-height: 1.65; color: var(--ink-mid);
+}
+.av-verify-icon {
+  font-family: var(--serif); font-style: italic; color: var(--taupe);
+  flex-shrink: 0; padding-top: 0.05em; font-size: 1rem;
+}
+
+/* Offerte note */
+.av-offerte {
+  margin-top: 3.5rem; padding: 2rem 2.25rem;
+  border-left: 2px solid var(--taupe);
+  background: var(--bg-alt);
+}
+.av-offerte-label {
+  font-family: var(--sans); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.75rem;
+}
+.av-offerte-text {
+  font-family: var(--serif); font-size: 1.0625rem; font-style: italic;
+  font-weight: 300; color: var(--ink-mid); line-height: 1.65;
+}
+
+.legal-note {
+  margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule);
+  font-size: 0.8125rem; color: var(--ink-soft); letter-spacing: 0.03em;
+}
+.legal-back {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 4rem;
+  font-family: var(--sans); font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.08em;
+  color: var(--ink-soft); border-bottom: 1px solid var(--rule-mid); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.legal-back:hover { color: var(--klei); border-color: var(--klei); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.ftr { background: var(--bg-alt); padding: 3rem var(--pad); }
+.ftr-inner {
+  max-width: var(--max); margin-inline: auto;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem;
+}
+.ftr-brand { display: flex; flex-direction: column; gap: 0.375rem; }
+.ftr-name { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--ink); }
+.ftr-tag { font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+.ftr-center { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.ftr-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+.ftr-nav a { font-size: 0.8125rem; color: var(--ink-mid); transition: color 0.2s; }
+.ftr-nav a:hover { color: var(--ink); }
+.ftr-kvk { font-size: 0.625rem; color: var(--ink-soft); letter-spacing: 0.08em; }
+.ftr-mark { justify-self: end; color: var(--ink-soft); opacity: 0.45; }
+
+/* ═══════════════════════════════════════
+   FOCUS
+═══════════════════════════════════════ */
+:focus-visible { outline: 2px solid var(--klei); outline-offset: 3px; }
+a:focus-visible, button:focus-visible { border-radius: 1px; }
+
+/* ═══════════════════════════════════════
+   PRINT CSS (voor PDF download)
+═══════════════════════════════════════ */
+@media print {
+  .hdr, .mob-nav, .burger, .hdr-utils, .pdf-btn, .legal-back, .ftr { display: none !important; }
+  body { background: #fff; color: #1a0a00; font-family: Georgia, serif; font-size: 11pt; line-height: 1.7; }
+  .legal-hero { padding: 2cm 0 1.5cm; border: none; }
+  .legal-body { padding: 0; }
+  .legal-body-inner { max-width: 100%; }
+  .legal-title { font-size: 28pt; color: #1a0a00; }
+  .legal-sub { font-size: 13pt; color: #4a2a0a; }
+  .legal-meta { font-size: 9pt; color: #8a6040; }
+  .legal-intro p, .av-p, .av-list li { color: #3a2010; font-size: 10.5pt; }
+  .av-article-title { font-size: 11pt; color: #1a0a00; border-bottom: 0.5pt solid #c0a080; padding-bottom: 4pt; }
+  .av-verify { background: #f5f0e8; border: 0.5pt solid #c0a080; }
+  .av-offerte { background: #f5f0e8; border-left: 2pt solid #b09060; }
+  .av-article { break-inside: avoid; }
+  .legal-ac { color: #b09060; }
+  .legal-intro { border-bottom: 0.5pt solid #c0a080; }
+  .legal-note { border-top: 0.5pt solid #c0a080; font-size: 9pt; }
+  @page { margin: 2.5cm 3cm; }
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --pad: 1.75rem; }
+  .hdr-nav, .hdr-cta, .hdr-utils { display: none; }
+  .burger { display: flex; }
+  .ftr-inner { grid-template-columns: 1fr; text-align: center; }
+  .ftr-brand { align-items: center; }
+  .ftr-mark { justify-self: center; }
+}
+@media (max-width: 480px) {
+  :root { --pad: var(--pad-sm); }
+  .legal-hero { padding-block: 6rem 3rem; }
+  .legal-body { padding-block: 3.5rem 4.5rem; }
+  .av-list li { grid-template-columns: 1.25rem 1fr; gap: 0.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr" role="banner">
+  <a href="/" class="hdr-brand" aria-label="Anica.care – terug naar home">
+    <svg class="ac-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="0.85"/>
+      <text x="16" y="20.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="11.5" font-style="italic" font-weight="400" fill="currentColor">ac</text>
+    </svg>
+    anica.care
+  </a>
+  <nav class="hdr-nav" aria-label="Hoofdnavigatie">
+    <a href="/">Home</a>
+    <a href="/#over">Over Anica</a>
+    <a href="/#visie">Visie</a>
+    <a href="/#werkwijze">Werkwijze</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+  <a class="hdr-cta" href="/#contact">Van gedachten wisselen</a>
+  <div class="hdr-utils">
+    <button class="util-btn" id="dark-btn" aria-pressed="false" onclick="toggleDark()" aria-label="Donkere modus">◑</button>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu openen" aria-expanded="false" aria-controls="mob-nav" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mob-nav" aria-label="Mobiel menu" aria-hidden="true">
+  <a href="/" onclick="closeMob()">Home</a>
+  <a href="/#over" onclick="closeMob()">Over Anica</a>
+  <a href="/#visie" onclick="closeMob()">Visie</a>
+  <a href="/#werkwijze" onclick="closeMob()">Werkwijze</a>
+  <a href="/#contact" onclick="closeMob()">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="legal-hero">
+  <div class="legal-hero-inner">
+    <span class="legal-ac reveal">ac</span>
+    <h1 class="legal-title reveal" style="transition-delay:.1s">Algemene Voorwaarden</h1>
+    <p class="legal-sub reveal" style="transition-delay:.2s">Duidelijke afspraken voor een goede samenwerking.</p>
+    <p class="legal-meta reveal" style="transition-delay:.28s">anica.care · KvK 42115156 · Laatst bijgewerkt: september 2026</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="legal-body">
+  <div class="legal-body-inner">
+
+    <!-- Intro -->
+    <div class="legal-intro reveal">
+      <p>
+        Deze algemene voorwaarden zijn van toepassing op de zakelijke dienstverlening van anica.care.
+        Ze beschrijven de afspraken die gelden bij offertes, opdrachten en overeenkomsten tussen anica.care en haar opdrachtgevers.
+      </p>
+      <p>
+        De voorwaarden zijn bedoeld om vooraf duidelijkheid te geven over de samenwerking, uitvoering van opdrachten,
+        tarieven, betaling, vertrouwelijkheid, intellectueel eigendom, aansprakelijkheid en beëindiging van opdrachten.
+      </p>
+
+      <button class="pdf-btn" onclick="window.print()" aria-label="Download Algemene Voorwaarden als PDF">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download als PDF ↓
+      </button>
+    </div>
+
+    <!-- Artikel 1 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 1 — Definities</h2>
+      <p class="av-p">In deze algemene voorwaarden wordt verstaan onder:</p>
+      <ul class="av-list">
+        <li><span class="n">—</span><span><strong style="color:var(--ink);font-weight:500">anica.care:</strong> de onderneming die onder de naam anica.care professionele diensten aanbiedt.</span></li>
+        <li><span class="n">—</span><span><strong style="color:var(--ink);font-weight:500">Opdrachtgever:</strong> de natuurlijke persoon handelend in de uitoefening van beroep of bedrijf, rechtspersoon of organisatie die met anica.care een overeenkomst aangaat.</span></li>
+        <li><span class="n">—</span><span><strong style="color:var(--ink);font-weight:500">Opdracht:</strong> de overeengekomen werkzaamheden die anica.care voor opdrachtgever uitvoert.</span></li>
+        <li><span class="n">—</span><span><strong style="color:var(--ink);font-weight:500">Overeenkomst:</strong> iedere overeenkomst tussen anica.care en opdrachtgever betreffende de levering van diensten.</span></li>
+        <li><span class="n">—</span><span><strong style="color:var(--ink);font-weight:500">Offerte:</strong> ieder schriftelijk of elektronisch aanbod van anica.care voor het uitvoeren van werkzaamheden.</span></li>
+      </ul>
+    </div>
+
+    <!-- Artikel 2 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 2 — Toepasselijkheid</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Deze algemene voorwaarden zijn van toepassing op alle offertes, opdrachtbevestigingen en overeenkomsten tussen anica.care en opdrachtgever, tenzij schriftelijk anders is overeengekomen.</span></li>
+        <li><span class="n">2.</span><span>De voorwaarden zijn eveneens van toepassing op aanvullende opdrachten en vervolgopdrachten.</span></li>
+        <li><span class="n">3.</span><span>Afwijkingen van deze algemene voorwaarden zijn alleen geldig wanneer deze schriftelijk tussen partijen zijn overeengekomen.</span></li>
+        <li><span class="n">4.</span><span>Wanneer een specifieke afspraak in een overeenkomst afwijkt van deze algemene voorwaarden, heeft de specifieke afspraak voorrang.</span></li>
+        <li><span class="n">5.</span><span>Algemene voorwaarden van opdrachtgever zijn alleen van toepassing wanneer anica.care deze uitdrukkelijk schriftelijk heeft aanvaard.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 3 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 3 — Aanbod, offerte en overeenkomst</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Offertes en aanbiedingen van anica.care zijn vrijblijvend, tenzij uitdrukkelijk anders is vermeld.</span></li>
+        <li><span class="n">2.</span><span>Een offerte heeft een geldigheidsduur van 30 dagen, tenzij in de offerte een andere termijn wordt genoemd.</span></li>
+        <li><span class="n">3.</span><span>Een overeenkomst komt tot stand wanneer opdrachtgever een offerte of opdrachtbevestiging schriftelijk of elektronisch aanvaardt, of wanneer anica.care met instemming van opdrachtgever met de uitvoering begint.</span></li>
+        <li><span class="n">4.</span><span>Aanvullende mondelinge afspraken zijn bindend nadat deze schriftelijk of elektronisch zijn bevestigd.</span></li>
+        <li><span class="n">5.</span><span>Kennelijke fouten, verschrijvingen en rekenfouten binden anica.care niet wanneer opdrachtgever redelijkerwijs kon begrijpen dat sprake was van een fout.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 4 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 4 — Uitvoering van de opdracht</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>anica.care voert opdrachten zorgvuldig en naar beste professionele inzicht en vermogen uit.</span></li>
+        <li><span class="n">2.</span><span>Tenzij uitdrukkelijk schriftelijk anders overeengekomen, betreft de dienstverlening een inspanningsverbintenis en wordt geen specifiek resultaat gegarandeerd.</span></li>
+        <li><span class="n">3.</span><span>anica.care bepaalt binnen de overeengekomen kaders zelfstandig de wijze waarop de opdracht professioneel wordt uitgevoerd.</span></li>
+        <li><span class="n">4.</span><span>Opgegeven uitvoeringstermijnen zijn indicatief, tenzij uitdrukkelijk een fatale termijn is overeengekomen.</span></li>
+        <li><span class="n">5.</span><span>anica.care kan, indien dit voor een goede uitvoering van de opdracht noodzakelijk of wenselijk is, na passende afstemming derden inschakelen.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 5 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 5 — Verplichtingen opdrachtgever</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Opdrachtgever verstrekt tijdig alle informatie, documenten en medewerking die redelijkerwijs noodzakelijk zijn voor de uitvoering van de opdracht.</span></li>
+        <li><span class="n">2.</span><span>Opdrachtgever staat in voor de juistheid, volledigheid en betrouwbaarheid van de verstrekte informatie.</span></li>
+        <li><span class="n">3.</span><span>Wanneer noodzakelijke informatie of medewerking niet tijdig beschikbaar is, kan dit gevolgen hebben voor planning, doorlooptijd en kosten.</span></li>
+        <li><span class="n">4.</span><span>Extra werkzaamheden die hierdoor noodzakelijk worden, kunnen als meerwerk worden gefactureerd.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 6 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 6 — Wijzigingen en meerwerk</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Wanneer opdrachtgever tijdens de uitvoering aanvullende of gewijzigde werkzaamheden vraagt, worden de gevolgen voor omvang, planning en kosten afgestemd.</span></li>
+        <li><span class="n">2.</span><span>Werkzaamheden buiten de oorspronkelijk overeengekomen opdracht kunnen als meerwerk worden aangemerkt.</span></li>
+        <li><span class="n">3.</span><span>anica.care informeert opdrachtgever waar redelijkerwijs mogelijk vooraf over de financiële gevolgen van substantieel meerwerk.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 7 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 7 — Tarieven en kosten</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Alle tarieven zijn exclusief btw, tenzij anders vermeld.</span></li>
+        <li><span class="n">2.</span><span>Reis-, verblijf-, locatie- of andere externe kosten worden aanvullend in rekening gebracht wanneer dit vooraf is overeengekomen of uit de offerte blijkt.</span></li>
+        <li><span class="n">3.</span><span>Aanvullende werkzaamheden buiten de overeengekomen opdracht kunnen afzonderlijk worden gefactureerd.</span></li>
+        <li><span class="n">4.</span><span>Bij langlopende overeenkomsten kan anica.care tarieven periodiek aanpassen. Een tariefwijziging wordt vooraf bekendgemaakt.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 8 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 8 — Facturering en betaling</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Facturering vindt plaats overeenkomstig de afspraken in de offerte of opdrachtbevestiging.</span></li>
+        <li><span class="n">2.</span><span>Facturen dienen binnen 30 dagen na factuurdatum te worden voldaan, tenzij schriftelijk een andere betalingstermijn is overeengekomen.</span></li>
+        <li><span class="n">3.</span><span>Bij niet-tijdige betaling is na het intreden van verzuim de wettelijk toepasselijke rente verschuldigd.</span></li>
+        <li><span class="n">4.</span><span>Redelijke buitengerechtelijke incassokosten kunnen overeenkomstig de toepasselijke wettelijke regels in rekening worden gebracht.</span></li>
+        <li><span class="n">5.</span><span>Een bezwaar tegen een factuur schort de betalingsverplichting voor het niet-betwiste gedeelte niet automatisch op.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 9 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 9 — Annulering en verplaatsing</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Voor geplande afspraken, adviesdagen of dagdelen kunnen in de offerte of opdrachtbevestiging specifieke annuleringsvoorwaarden worden overeengekomen.</span></li>
+        <li><span class="n">2.</span><span>Bij late annulering kan gereserveerde tijd geheel of gedeeltelijk in rekening worden gebracht wanneer deze redelijkerwijs niet meer voor andere werkzaamheden kan worden benut.</span></li>
+        <li><span class="n">3.</span><span>Bij langlopende projecten worden afspraken over tussentijdse beëindiging zoveel mogelijk in de offerte of opdrachtbevestiging vastgelegd.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 10 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 10 — Duur en beëindiging</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Een overeenkomst wordt aangegaan voor de overeengekomen duur of voor de duur die noodzakelijk is voor uitvoering van de opdracht.</span></li>
+        <li><span class="n">2.</span><span>Een overeenkomst voor bepaalde tijd eindigt wanneer de overeengekomen werkzaamheden zijn afgerond of de overeengekomen einddatum is bereikt.</span></li>
+        <li><span class="n">3.</span><span>Wanneer tussentijdse beëindiging mogelijk is, gelden de afspraken uit de offerte of opdrachtbevestiging.</span></li>
+        <li><span class="n">4.</span><span>Bij tussentijdse beëindiging worden de tot het moment van beëindiging verrichte werkzaamheden en reeds redelijkerwijs aangegane externe verplichtingen afgerekend.</span></li>
+        <li><span class="n">5.</span><span>Een overeenkomst kan worden beëindigd wanneer de andere partij ernstig tekortschiet in haar verplichtingen en voortzetting redelijkerwijs niet kan worden verlangd, waarbij waar passend eerst gelegenheid tot herstel wordt gegeven.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 11 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 11 — Opschorting</h2>
+      <p class="av-p">anica.care kan de werkzaamheden opschorten wanneer opdrachtgever wezenlijk tekortschiet in zijn verplichtingen, waaronder het niet tijdig betalen van opeisbare facturen of het niet beschikbaar stellen van informatie die noodzakelijk is voor uitvoering van de opdracht. Opschorting vindt alleen plaats voor zover dit redelijk en proportioneel is.</p>
+    </div>
+
+    <!-- Artikel 12 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 12 — Intellectueel eigendom</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Rechten op door anica.care ontwikkelde of gebruikte methodieken, modellen, formats, concepten, presentaties, teksten, rapportages, werkwijzen en andere materialen blijven bij anica.care of de oorspronkelijke rechthebbende, tenzij schriftelijk anders overeengekomen.</span></li>
+        <li><span class="n">2.</span><span>Opdrachtgever mag specifiek voor de opdracht opgeleverde documenten en resultaten binnen de eigen organisatie gebruiken voor het doel waarvoor deze zijn verstrekt.</span></li>
+        <li><span class="n">3.</span><span>Materialen waarop intellectuele eigendomsrechten van anica.care rusten mogen zonder toestemming niet commercieel worden geëxploiteerd, doorverkocht, openbaar gemaakt of als eigen product aan derden worden aangeboden.</span></li>
+        <li><span class="n">4.</span><span>Reeds vóór de opdracht bestaande kennis, methodieken en materialen blijven eigendom van de oorspronkelijke rechthebbende.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 13 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 13 — Vertrouwelijkheid</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Partijen behandelen vertrouwelijke informatie die zij tijdens de opdracht ontvangen zorgvuldig en vertrouwelijk.</span></li>
+        <li><span class="n">2.</span><span>Informatie is vertrouwelijk wanneer dit is aangegeven of redelijkerwijs uit de aard ervan voortvloeit.</span></li>
+        <li><span class="n">3.</span><span>Vertrouwelijke informatie wordt niet zonder toestemming met derden gedeeld, behalve wanneer dit noodzakelijk is voor de uitvoering van de opdracht of wettelijk verplicht is.</span></li>
+        <li><span class="n">4.</span><span>De geheimhoudingsverplichting blijft waar relevant na beëindiging van de overeenkomst bestaan.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 14 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 14 — Privacy en persoonsgegevens</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Wanneer tijdens een opdracht persoonsgegevens worden verwerkt, handelen partijen overeenkomstig de toepasselijke privacywetgeving, waaronder de AVG.</span></li>
+        <li><span class="n">2.</span><span>Wanneer anica.care in opdracht van opdrachtgever persoonsgegevens verwerkt en daarvoor een verwerkersovereenkomst noodzakelijk is, worden hierover afzonderlijke afspraken gemaakt.</span></li>
+        <li><span class="n">3.</span><span>De privacyverklaring van anica.care is beschikbaar via <a href="/privacy">/privacy</a>.</span></li>
+        <li><span class="n">4.</span><span>De website is niet bedoeld als patiëntendossier of als platform voor het onbeveiligd uitwisselen van medische of andere bijzondere persoonsgegevens.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 15 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 15 — Inschakeling van derden</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>anica.care kan derden inschakelen wanneer dit noodzakelijk of wenselijk is voor een goede uitvoering van de opdracht.</span></li>
+        <li><span class="n">2.</span><span>Wanneer inschakeling van een derde substantiële aanvullende kosten veroorzaakt, wordt dit vooraf met opdrachtgever afgestemd.</span></li>
+        <li><span class="n">3.</span><span>Voor zelfstandig door opdrachtgever ingeschakelde derden draagt anica.care geen verantwoordelijkheid, voor zover wettelijk toegestaan.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 16 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 16 — Aansprakelijkheid</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>anica.care is aansprakelijk voor directe schade als gevolg van een toerekenbare tekortkoming in de uitvoering van de overeenkomst, voor zover deze aansprakelijkheid volgens de wet bestaat.</span></li>
+        <li><span class="n">2.</span><span>Voor zover wettelijk toegestaan is anica.care niet aansprakelijk voor indirecte schade, zoals gevolgschade, gederfde winst, gemiste besparingen of bedrijfsstagnatie.</span></li>
+        <li><span class="n">3.</span><span>Een beperking of uitsluiting van aansprakelijkheid geldt niet voor zover dit volgens dwingend Nederlands recht niet is toegestaan.</span></li>
+      </ol>
+      <div class="av-verify">
+        <span class="av-verify-icon">↗</span>
+        <span>
+          <strong style="color:var(--ink);font-weight:500">Te controleren vóór publicatie:</strong>
+          wanneer anica.care beschikt over een beroeps- of bedrijfsaansprakelijkheidsverzekering, kan lid 2 worden aangevuld met een beperking tot het door de verzekeraar uitgekeerde bedrag vermeerderd met het eigen risico. Controleer eerst of een dergelijke verzekering daadwerkelijk aanwezig is en neem de juiste gegevens op.
+        </span>
+      </div>
+    </div>
+
+    <!-- Artikel 17 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 17 — Overmacht</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Een partij is niet gehouden een verplichting na te komen wanneer nakoming onmogelijk is door omstandigheden die redelijkerwijs buiten haar invloedssfeer liggen.</span></li>
+        <li><span class="n">2.</span><span>Bij overmacht treden partijen zo spoedig mogelijk in overleg over voortzetting, aanpassing of beëindiging van de opdracht.</span></li>
+        <li><span class="n">3.</span><span>Reeds uitgevoerde werkzaamheden mogen worden gefactureerd.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 18 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 18 — Klachten</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Wanneer opdrachtgever niet tevreden is over de uitvoering van een opdracht, wordt dit zo spoedig mogelijk bij anica.care gemeld.</span></li>
+        <li><span class="n">2.</span><span>Partijen proberen een klacht eerst in onderling overleg op te lossen.</span></li>
+        <li><span class="n">3.</span><span>Klachten kunnen worden gemeld via <a href="mailto:anica@anica.care">anica@anica.care</a>.</span></li>
+        <li><span class="n">4.</span><span>Een klacht schort de betalingsverplichting niet automatisch op.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 19 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 19 — Wijziging van de algemene voorwaarden</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>anica.care kan deze algemene voorwaarden wijzigen.</span></li>
+        <li><span class="n">2.</span><span>Voor lopende opdrachten blijven in beginsel de voorwaarden gelden die bij het aangaan van de overeenkomst van toepassing waren, tenzij partijen anders overeenkomen of een wijziging wettelijk noodzakelijk is.</span></li>
+        <li><span class="n">3.</span><span>De actuele versie wordt gepubliceerd op anica.care.</span></li>
+      </ol>
+    </div>
+
+    <!-- Artikel 20 -->
+    <div class="av-article reveal">
+      <h2 class="av-article-title">Artikel 20 — Toepasselijk recht en geschillen</h2>
+      <ol class="av-list">
+        <li><span class="n">1.</span><span>Op overeenkomsten tussen anica.care en opdrachtgever is Nederlands recht van toepassing.</span></li>
+        <li><span class="n">2.</span><span>Partijen proberen geschillen eerst in goed onderling overleg op te lossen.</span></li>
+        <li><span class="n">3.</span><span>Wanneer dit niet lukt, kan het geschil worden voorgelegd aan de volgens Nederlands recht bevoegde rechter.</span></li>
+      </ol>
+    </div>
+
+    <!-- Offerte formulering -->
+    <div class="av-offerte reveal">
+      <p class="av-offerte-label">Formulering voor offertes</p>
+      <p class="av-offerte-text">
+        "Op deze offerte en de daaruit voortvloeiende overeenkomst zijn de Algemene Voorwaarden van anica.care van toepassing. De Algemene Voorwaarden zijn voorafgaand aan of bij het aangaan van de overeenkomst elektronisch ter beschikking gesteld."
+      </p>
+    </div>
+
+    <p class="legal-note reveal">
+      Bepalingen over annulering (artikel 9), beëindiging (artikel 10) en aansprakelijkheid (artikel 16) verdienen
+      juridische toetsing vóór zakelijk gebruik en moeten aansluiten bij de werkelijke contracten en verzekeringsdekking van anica.care.
+      Deze voorwaarden zijn bedoeld voor B2B-dienstverlening. Bij overeenkomsten met particuliere consumenten is aanpassing aan het consumentenrecht noodzakelijk.
+    </p>
+
+    <a href="/" class="legal-back reveal">← Terug naar anica.care</a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="ftr" role="contentinfo">
+  <div class="ftr-inner">
+    <div class="ftr-brand">
+      <span class="ftr-name">anica.care</span>
+      <span class="ftr-tag">Mens · Zorg · Verbinding</span>
+    </div>
+    <div class="ftr-center">
+      <nav class="ftr-nav" aria-label="Footer navigatie">
+        <a href="/#contact">Contact</a>
+        <a href="https://www.linkedin.com/in/anicaeurelings/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/algemene-voorwaarden" aria-current="page">Algemene voorwaarden</a>
+        <a href="/disclaimer">Disclaimer</a>
+      </nav>
+      <p class="ftr-kvk">KvK 42115156 &ensp;·&ensp; anica@anica.care</p>
+    </div>
+    <div class="ftr-mark" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="0.85"/>
+        <text x="16" y="20.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="11.5" font-style="italic" font-weight="400" fill="currentColor">ac</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => { hdr.classList.toggle('is-scrolled', window.scrollY > 20); }, { passive: true });
+
+const darkBtn = document.getElementById('dark-btn');
+function toggleDark() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  darkBtn.setAttribute('aria-pressed', String(!isDark));
+  darkBtn.setAttribute('aria-label', isDark ? 'Donkere modus' : 'Lichte modus');
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+(function() {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') {
+      document.documentElement.dataset.theme = saved;
+      if (saved === 'dark') { darkBtn.setAttribute('aria-pressed', 'true'); darkBtn.setAttribute('aria-label', 'Lichte modus'); }
+    }
+  } catch(e) {}
+})();
+
+const burger = document.getElementById('burger');
+const mobNav = document.getElementById('mob-nav');
+function toggleMob() {
+  const open = mobNav.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  mobNav.setAttribute('aria-hidden', String(!open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMob() {
+  mobNav.classList.remove('open'); burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false'); mobNav.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobNav.classList.contains('open')) closeMob(); });
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

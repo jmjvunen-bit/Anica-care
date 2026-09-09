@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — Anica.care</title>
+<meta name="description" content="Privacyverklaring van anica.care — zorgvuldig omgaan met persoonsgegevens.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://anica.care/privacy">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap">
+
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS — licht
+═══════════════════════════════════════ */
+:root {
+  --bg:       #FAF7F4;
+  --bg-alt:   #F3EDE6;
+  --bg-sand:  #EDE4D8;
+  --ink:      #2D1506;
+  --ink-mid:  #5C3D22;
+  --ink-soft: #9A7E6A;
+  --klei:     #87674E;
+  --taupe:    #B09A84;
+  --rule:     rgba(100,65,40,0.13);
+  --rule-mid: rgba(100,65,40,0.22);
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+  --max:   1280px;
+  --pad:   2.5rem;
+  --pad-sm:1.25rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:       #1A0E07;
+    --bg-alt:   #241507;
+    --bg-sand:  #2E1B0A;
+    --ink:      #F0E6DA;
+    --ink-mid:  #C4A888;
+    --ink-soft: #7A6050;
+    --klei:     #C49A78;
+    --taupe:    #8A7060;
+    --rule:     rgba(200,165,130,0.10);
+    --rule-mid: rgba(200,165,130,0.18);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:       #1A0E07;
+  --bg-alt:   #241507;
+  --bg-sand:  #2E1B0A;
+  --ink:      #F0E6DA;
+  --ink-mid:  #C4A888;
+  --ink-soft: #7A6050;
+  --klei:     #C49A78;
+  --taupe:    #8A7060;
+  --rule:     rgba(200,165,130,0.10);
+  --rule-mid: rgba(200,165,130,0.18);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg:       #FAF7F4;
+  --bg-alt:   #F3EDE6;
+  --bg-sand:  #EDE4D8;
+  --ink:      #2D1506;
+  --ink-mid:  #5C3D22;
+  --ink-soft: #9A7E6A;
+  --klei:     #87674E;
+  --taupe:    #B09A84;
+  --rule:     rgba(100,65,40,0.13);
+  --rule-mid: rgba(100,65,40,0.22);
+  color-scheme: light;
+}
+
+/* ═══════════════════════════════════════
+   RESET
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+.hdr {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem var(--pad);
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.35s, background 0.35s;
+}
+.hdr.is-scrolled { border-color: var(--rule); }
+
+.hdr-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.025em;
+}
+.ac-mark { width: 30px; height: 30px; flex-shrink: 0; color: var(--ink); }
+
+.hdr-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+}
+.hdr-nav a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
+.hdr-nav a::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--klei);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+}
+.hdr-nav a:hover { color: var(--ink); }
+.hdr-nav a:hover::after { transform: scaleX(1); }
+
+.hdr-cta {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ink-mid);
+  border: 1px solid var(--rule-mid);
+  padding: 0.45rem 1.125rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hdr-cta:hover { color: var(--ink); border-color: var(--klei); }
+
+.hdr-utils {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-right: 0.125rem;
+}
+.util-btn {
+  background: none;
+  border: 1px solid var(--rule-mid);
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0 0.5rem;
+  height: 30px;
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.util-btn:hover { color: var(--ink); border-color: var(--taupe); }
+.util-btn[aria-pressed="true"] { color: var(--ink); border-color: var(--klei); }
+
+/* Burger */
+.burger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  color: var(--ink);
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.28s ease, opacity 0.2s;
+}
+.burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile nav */
+.mob-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.mob-nav.open { opacity: 1; pointer-events: auto; }
+.mob-nav a {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--ink-mid);
+  transition: color 0.2s;
+}
+.mob-nav a:hover { color: var(--ink); }
+
+/* ═══════════════════════════════════════
+   LEGAL PAGE LAYOUT
+═══════════════════════════════════════ */
+.legal-hero {
+  padding: 8rem var(--pad) 4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.legal-hero-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+}
+.legal-ac {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--taupe);
+  margin-bottom: 1.25rem;
+  opacity: 0.8;
+}
+.legal-title {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.0;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+.legal-sub {
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-mid);
+  max-width: 52ch;
+}
+
+.legal-body {
+  padding: 5rem var(--pad) 6rem;
+}
+.legal-body-inner {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.legal-section {
+  margin-bottom: 3.5rem;
+}
+.legal-section:last-of-type { margin-bottom: 0; }
+
+.legal-h2 {
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid var(--rule);
+}
+.legal-p {
+  font-size: 1.0rem;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  margin-bottom: 1em;
+}
+.legal-p:last-child { margin-bottom: 0; }
+.legal-p a {
+  color: var(--klei);
+  border-bottom: 1px solid var(--rule-mid);
+  transition: border-color 0.2s;
+}
+.legal-p a:hover { border-color: var(--klei); }
+
+.legal-list {
+  list-style: none;
+  margin: 0.75em 0 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.legal-list li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink-mid);
+}
+.legal-list li::before {
+  content: '—';
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--taupe);
+  flex-shrink: 0;
+}
+
+.legal-note {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+}
+
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 4rem;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--rule-mid);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.legal-back:hover { color: var(--klei); border-color: var(--klei); }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.ftr {
+  background: var(--bg-alt);
+  padding: 3rem var(--pad);
+}
+.ftr-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+.ftr-brand { display: flex; flex-direction: column; gap: 0.375rem; }
+.ftr-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--ink);
+}
+.ftr-tag {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.ftr-center { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.ftr-nav { display: flex; gap: 2rem; }
+.ftr-nav a { font-size: 0.8125rem; color: var(--ink-mid); transition: color 0.2s; }
+.ftr-nav a:hover { color: var(--ink); }
+.ftr-kvk { font-size: 0.625rem; color: var(--ink-soft); letter-spacing: 0.08em; }
+.ftr-mark { justify-self: end; color: var(--ink-soft); opacity: 0.45; }
+
+/* ═══════════════════════════════════════
+   FOCUS
+═══════════════════════════════════════ */
+:focus-visible { outline: 2px solid var(--klei); outline-offset: 3px; }
+a:focus-visible, button:focus-visible { border-radius: 1px; }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --pad: 1.75rem; }
+  .hdr-nav, .hdr-cta, .hdr-utils { display: none; }
+  .burger { display: flex; }
+  .ftr-inner { grid-template-columns: 1fr; text-align: center; }
+  .ftr-brand { align-items: center; }
+  .ftr-mark { justify-self: center; }
+}
+@media (max-width: 480px) {
+  :root { --pad: var(--pad-sm); }
+  .legal-hero { padding-block: 6rem 3rem; }
+  .legal-body { padding-block: 3.5rem 4.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr" role="banner">
+  <a href="/" class="hdr-brand" aria-label="Anica.care – terug naar home">
+    <svg class="ac-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="0.85"/>
+      <text x="16" y="20.5" text-anchor="middle"
+        font-family="'Cormorant Garamond', Georgia, serif"
+        font-size="11.5" font-style="italic" font-weight="400"
+        fill="currentColor">ac</text>
+    </svg>
+    anica.care
+  </a>
+
+  <nav class="hdr-nav" aria-label="Hoofdnavigatie">
+    <a href="/">Home</a>
+    <a href="/#over">Over Anica</a>
+    <a href="/#visie">Visie</a>
+    <a href="/#werkwijze">Werkwijze</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+
+  <a class="hdr-cta" href="/#contact">Van gedachten wisselen</a>
+
+  <div class="hdr-utils">
+    <button class="util-btn" id="dark-btn" aria-pressed="false" onclick="toggleDark()" aria-label="Donkere modus">◑</button>
+  </div>
+
+  <button class="burger" id="burger" aria-label="Menu openen" aria-expanded="false" aria-controls="mob-nav"
+          onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav" id="mob-nav" aria-label="Mobiel menu" aria-hidden="true">
+  <a href="/" onclick="closeMob()">Home</a>
+  <a href="/#over" onclick="closeMob()">Over Anica</a>
+  <a href="/#visie" onclick="closeMob()">Visie</a>
+  <a href="/#werkwijze" onclick="closeMob()">Werkwijze</a>
+  <a href="/#contact" onclick="closeMob()">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="legal-hero">
+  <div class="legal-hero-inner">
+    <span class="legal-ac reveal">ac</span>
+    <h1 class="legal-title reveal" style="transition-delay:.1s">Privacy</h1>
+    <p class="legal-sub reveal" style="transition-delay:.2s">Zorgvuldig omgaan met informatie.</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<div class="legal-body">
+  <div class="legal-body-inner">
+
+    <div class="legal-section reveal">
+      <p class="legal-p">
+        Bij anica.care vind ik het belangrijk dat persoonsgegevens zorgvuldig en transparant worden behandeld.
+        In deze privacyverklaring lees je welke persoonsgegevens kunnen worden verwerkt, waarom dat gebeurt en welke rechten je daarbij hebt.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Wie is verantwoordelijk?</h2>
+      <p class="legal-p">
+        De verantwoordelijke voor de verwerking van persoonsgegevens via deze website en in het kader van de dienstverlening is:
+      </p>
+      <p class="legal-p">
+        anica.care<br>
+        KvK 42115156<br>
+        <a href="mailto:anica@anica.care">anica@anica.care</a>
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Welke persoonsgegevens kunnen worden verwerkt?</h2>
+      <p class="legal-p">
+        Wanneer je contact opneemt met anica.care, kunnen gegevens worden verwerkt die je zelf verstrekt. Denk bijvoorbeeld aan:
+      </p>
+      <ul class="legal-list">
+        <li>naam;</li>
+        <li>e-mailadres;</li>
+        <li>telefoonnummer;</li>
+        <li>organisatie en functie;</li>
+        <li>inhoud van correspondentie;</li>
+        <li>gegevens die nodig zijn om een mogelijke samenwerking of opdracht te bespreken of uit te voeren.</li>
+      </ul>
+      <p class="legal-p">
+        Daarnaast kunnen bij het bezoeken van deze website technische gegevens worden verwerkt die noodzakelijk zijn voor het functioneren en beveiligen van de website.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Waarvoor worden persoonsgegevens gebruikt?</h2>
+      <p class="legal-p">Persoonsgegevens kunnen worden gebruikt om:</p>
+      <ul class="legal-list">
+        <li>vragen en berichten te beantwoorden;</li>
+        <li>contact op te nemen naar aanleiding van een verzoek;</li>
+        <li>afspraken te maken;</li>
+        <li>een mogelijke samenwerking of opdracht te bespreken;</li>
+        <li>overeenkomsten uit te voeren;</li>
+        <li>de administratie te voeren;</li>
+        <li>te voldoen aan wettelijke verplichtingen;</li>
+        <li>de website veilig en goed te laten functioneren.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Op welke grondslag worden gegevens verwerkt?</h2>
+      <p class="legal-p">
+        Persoonsgegevens worden alleen verwerkt wanneer daarvoor een geldige grondslag bestaat.
+        Afhankelijk van de situatie kan dit bijvoorbeeld zijn:
+      </p>
+      <ul class="legal-list">
+        <li>toestemming;</li>
+        <li>het uitvoeren van een overeenkomst;</li>
+        <li>het treffen van maatregelen voorafgaand aan een overeenkomst;</li>
+        <li>een wettelijke verplichting;</li>
+        <li>een gerechtvaardigd belang, bijvoorbeeld voor normale bedrijfsvoering of beveiliging van de website.</li>
+      </ul>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Bijzondere persoonsgegevens</h2>
+      <p class="legal-p">
+        Stuur via gewone e-mail bij voorkeur geen medische gegevens of andere bijzondere persoonsgegevens,
+        tenzij dit noodzakelijk is en hierover passende afspraken zijn gemaakt.
+        Deze website is niet bedoeld als patiëntenportaal of medisch dossier.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Hoe lang worden gegevens bewaard?</h2>
+      <p class="legal-p">
+        Persoonsgegevens worden niet langer bewaard dan noodzakelijk is voor het doel waarvoor ze zijn verzameld,
+        tenzij er een wettelijke bewaarplicht geldt.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Worden gegevens met anderen gedeeld?</h2>
+      <p class="legal-p">
+        Persoonsgegevens worden niet verkocht.
+        Gegevens kunnen worden gedeeld met dienstverleners wanneer dit noodzakelijk is voor de bedrijfsvoering,
+        uitvoering van een overeenkomst of technische werking van de website.
+        Wanneer een externe partij namens anica.care persoonsgegevens verwerkt, worden waar nodig passende afspraken over gegevensbescherming gemaakt.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Cookies en websitegegevens</h2>
+      <p class="legal-p">
+        anica.care gebruikt <strong style="font-weight:500; color:var(--ink)">geen cookies</strong> en geen tracking- of analytische scripts.
+      </p>
+      <p class="legal-p">
+        Wel worden lettertypen geladen via <strong style="font-weight:500; color:var(--ink)">Google Fonts</strong> (fonts.googleapis.com),
+        een externe dienst van Google. Bij het laden van deze lettertypen kan Google technische informatie verwerken,
+        zoals het IP-adres van de bezoeker, ten behoeve van het leveren van de lettertypes.
+        Google heeft hier een eigen privacybeleid voor.
+      </p>
+      <p class="legal-p">
+        Verder maakt deze website gebruik van <strong style="font-weight:500; color:var(--ink)">localStorage</strong>, een technische opslagfunctie in uw browser.
+        Dit wordt uitsluitend gebruikt om uw voorkeur voor het thema (licht of donker) en de taal (Nederlands of Engels) te bewaren.
+        Deze gegevens worden niet naar een server verzonden, zijn alleen lokaal op uw eigen apparaat zichtbaar en worden niet voor andere doeleinden gebruikt.
+      </p>
+      <p class="legal-p">
+        Er worden op deze website geen contactformulieren verwerkt. Contact verloopt uitsluitend via e-mail of LinkedIn, waarvoor de privacyregels van die diensten gelden.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Beveiliging</h2>
+      <p class="legal-p">
+        anica.care neemt passende technische en organisatorische maatregelen om persoonsgegevens te beschermen
+        tegen verlies, misbruik, onbevoegde toegang en andere onrechtmatige verwerking.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Jouw rechten</h2>
+      <p class="legal-p">Je hebt op grond van de AVG, afhankelijk van de situatie, onder meer het recht om:</p>
+      <ul class="legal-list">
+        <li>persoonsgegevens in te zien;</li>
+        <li>gegevens te laten corrigeren;</li>
+        <li>gegevens te laten verwijderen;</li>
+        <li>verwerking te laten beperken;</li>
+        <li>bezwaar te maken tegen bepaalde verwerkingen;</li>
+        <li>gegevens over te laten dragen wanneer het recht op dataportabiliteit van toepassing is;</li>
+        <li>eerder gegeven toestemming in te trekken.</li>
+      </ul>
+      <p class="legal-p">
+        Een verzoek kan worden gestuurd naar: <a href="mailto:anica@anica.care">anica@anica.care</a>
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Een klacht indienen</h2>
+      <p class="legal-p">
+        Heb je een vraag of klacht over de verwerking van persoonsgegevens,
+        neem dan eerst contact op via <a href="mailto:anica@anica.care">anica@anica.care</a>.
+        Je hebt daarnaast het recht om een klacht in te dienen bij de
+        <a href="https://autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer">Autoriteit Persoonsgegevens</a>.
+      </p>
+    </div>
+
+    <div class="legal-section reveal">
+      <h2 class="legal-h2">Wijzigingen</h2>
+      <p class="legal-p">
+        Deze privacyverklaring kan worden aangepast wanneer de website, dienstverlening of toepasselijke wet- en regelgeving verandert.
+      </p>
+    </div>
+
+    <p class="legal-note reveal">Laatst bijgewerkt: september 2026</p>
+
+    <a href="/" class="legal-back reveal">← Terug naar anica.care</a>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="ftr" role="contentinfo">
+  <div class="ftr-inner">
+    <div class="ftr-brand">
+      <span class="ftr-name">anica.care</span>
+      <span class="ftr-tag">Mens · Zorg · Verbinding</span>
+    </div>
+    <div class="ftr-center">
+      <nav class="ftr-nav" aria-label="Footer navigatie">
+        <a href="/#contact">Contact</a>
+        <a href="https://www.linkedin.com/in/anicaeurelings/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="/privacy" aria-current="page">Privacy</a>
+        <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
+        <a href="/disclaimer">Disclaimer</a>
+      </nav>
+      <p class="ftr-kvk">KvK 42115156 &ensp;·&ensp; anica@anica.care</p>
+    </div>
+    <div class="ftr-mark" aria-hidden="true">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="14.5" stroke="currentColor" stroke-width="0.85"/>
+        <text x="16" y="20.5" text-anchor="middle"
+          font-family="'Cormorant Garamond', Georgia, serif"
+          font-size="11.5" font-style="italic" font-weight="400"
+          fill="currentColor">ac</text>
+      </svg>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Header scroll shadow */
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('is-scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* Dark mode */
+const darkBtn = document.getElementById('dark-btn');
+function toggleDark() {
+  const isDark = document.documentElement.dataset.theme === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  darkBtn.setAttribute('aria-pressed', String(!isDark));
+  darkBtn.setAttribute('aria-label', isDark ? 'Donkere modus' : 'Lichte modus');
+  try { localStorage.setItem('theme', next); } catch(e) {}
+}
+(function() {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') {
+      document.documentElement.dataset.theme = saved;
+      if (saved === 'dark') {
+        darkBtn.setAttribute('aria-pressed', 'true');
+        darkBtn.setAttribute('aria-label', 'Lichte modus');
+      }
+    }
+  } catch(e) {}
+})();
+
+/* Mobile nav */
+const burger = document.getElementById('burger');
+const mobNav = document.getElementById('mob-nav');
+function toggleMob() {
+  const open = mobNav.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  mobNav.setAttribute('aria-hidden', String(!open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMob() {
+  mobNav.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  mobNav.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && mobNav.classList.contains('open')) closeMob();
+});
+
+/* Scroll reveal */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
