@@ -794,6 +794,18 @@ button { cursor: pointer; }
   align-items: center;
   transition: color 0.2s, gap 0.2s;
 }
+.opdracht-monogram {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--klei);
+  border: 1.5px solid var(--klei);
+  border-radius: 4px;
+  padding: 0.3rem 0.6rem;
+  display: inline-flex;
+  align-items: center;
+}
 .opdracht-link:hover {
   color: var(--ink);
 }
@@ -1542,6 +1554,16 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
           </div>
         </div>
       </div>
+
+      <div class="opdracht-grid">
+        <div class="opdracht-item reveal">
+          <div class="opdracht-logo-wrap">
+            <span class="opdracht-monogram" aria-hidden="true">IZA</span>
+          </div>
+          <p class="opdracht-name" data-i18n="opdracht-iza-name">IZA Palliatieve Zorg — Mijnstreek</p>
+          <p class="opdracht-role" data-i18n="opdracht-iza-role">Adviseur strategisch plan, Kenniscentrum</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1865,6 +1887,8 @@ const T = {
     'opdracht-intro':            'Samenwerking in de zorg vraagt om meer dan goede bedoelingen. PlusWIJken is een van de organisaties waarmee ik aan concrete vraagstukken werk — van procesregie tot projectleiding.',
     'opdracht-pluswijken-role':  'Procesbegeleiding & projectleiding zorg',
     'opdracht-pluswijken-link':  'Bekijk de samenwerking →',
+    'opdracht-iza-name': 'IZA Palliatieve Zorg — Mijnstreek',
+    'opdracht-iza-role': 'Adviseur strategisch plan, Kenniscentrum',
     /* ── contact (main) ── */
     'contact-eyebrow':    'Contact',
     'contact-title':      'Even van gedachten<br>wisselen?',
@@ -1940,6 +1964,8 @@ const T = {
     'opdracht-intro':            'Collaboration in healthcare requires more than good intentions. PlusWIJken is one of the organisations I work with on concrete questions — from process facilitation to project leadership.',
     'opdracht-pluswijken-role':  'Process facilitation & project management in care',
     'opdracht-pluswijken-link':  'View the collaboration →',
+    'opdracht-iza-name': 'IZA Palliative Care — Mijnstreek',
+    'opdracht-iza-role': 'Adviser strategic plan, Knowledge Centre',
     /* ── contact (main) ── */
     'contact-eyebrow':    'Contact',
     'contact-title':      'Want to exchange<br>ideas?',
@@ -2015,6 +2041,8 @@ const T = {
     'opdracht-intro':            'Saomeswerking in de zörg vraog um mieë dan goei bédoelinge. PlusWIJken is ein vaan de organisasies waarmee ich aan concrete vraogstukke werk — vaan procesregie tot projectleiding.',
     'opdracht-pluswijken-role':  'Procesbegeleiding & projectleiding zörg',
     'opdracht-pluswijken-link':  'Bekiek de saomeswerking →',
+    'opdracht-iza-name': 'IZA Palliatieve Zörg — Mijnstreek',
+    'opdracht-iza-role': 'Adviseur strategisch plan, Kenniscentrum',
     /* ── contact (main) ── */
     'contact-eyebrow':    'Contact',
     'contact-title':      'Even klappeche?',
