@@ -294,6 +294,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
    PRINT CSS (voor PDF download)
 ═══════════════════════════════════════ */
 @media print {
+  .concept-banner { background: #f5f0e8; border-left: 2pt solid #8a6040; color: #3a2010; font-size: 10pt; padding: 8pt 10pt; }
+
   .hdr, .mob-nav, .burger, .hdr-utils, .pdf-btn, .legal-back, .ftr { display: none !important; }
   body { background: #fff; color: #1a0a00; font-family: Georgia, serif; font-size: 11pt; line-height: 1.7; }
   .legal-hero { padding: 2cm 0 1.5cm; border: none; }
@@ -329,6 +331,23 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   .legal-hero { padding-block: 6rem 3rem; }
   .legal-body { padding-block: 3.5rem 4.5rem; }
   .av-list li { grid-template-columns: 1.25rem 1fr; gap: 0.5rem; }
+}
+
+/* Conceptmelding — bewust zonder .reveal: die start op opacity 0,
+   waardoor de melding zou verdwijnen als JavaScript niet laadt. */
+.concept-banner {
+  margin-top: 2.25rem;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid var(--klei);
+  background: rgba(135,103,78,0.07);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  max-width: 64ch;
+}
+.concept-banner strong {
+  color: var(--ink);
+  font-weight: 500;
 }
 </style>
 </head>
@@ -374,6 +393,9 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     <span class="legal-ac reveal">ac</span>
     <h1 class="legal-title reveal" style="transition-delay:.1s">Algemene Voorwaarden</h1>
     <p class="legal-sub reveal" style="transition-delay:.2s">Duidelijke afspraken voor een goede samenwerking.</p>
+    <p class="concept-banner" role="note">
+      <strong>Conceptversie.</strong> Deze tekst is nog niet definitief en is nog niet van toepassing op opdrachten of dienstverlening.
+    </p>
     <p class="legal-meta reveal" style="transition-delay:.28s">anica.care · KvK 42115156 · Laatst bijgewerkt: september 2026</p>
   </div>
 </section>
@@ -573,13 +595,6 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
         <li><span class="n">2.</span><span>Voor zover wettelijk toegestaan is anica.care niet aansprakelijk voor indirecte schade, zoals gevolgschade, gederfde winst, gemiste besparingen of bedrijfsstagnatie.</span></li>
         <li><span class="n">3.</span><span>Een beperking of uitsluiting van aansprakelijkheid geldt niet voor zover dit volgens dwingend Nederlands recht niet is toegestaan.</span></li>
       </ol>
-      <div class="av-verify">
-        <span class="av-verify-icon">↗</span>
-        <span>
-          <strong style="color:var(--ink);font-weight:500">Te controleren vóór publicatie:</strong>
-          wanneer anica.care beschikt over een beroeps- of bedrijfsaansprakelijkheidsverzekering, kan lid 2 worden aangevuld met een beperking tot het door de verzekeraar uitgekeerde bedrag vermeerderd met het eigen risico. Controleer eerst of een dergelijke verzekering daadwerkelijk aanwezig is en neem de juiste gegevens op.
-        </span>
-      </div>
     </div>
 
     <!-- Artikel 17 -->
@@ -624,18 +639,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     </div>
 
     <!-- Offerte formulering -->
-    <div class="av-offerte reveal">
-      <p class="av-offerte-label">Formulering voor offertes</p>
-      <p class="av-offerte-text">
-        "Op deze offerte en de daaruit voortvloeiende overeenkomst zijn de Algemene Voorwaarden van anica.care van toepassing. De Algemene Voorwaarden zijn voorafgaand aan of bij het aangaan van de overeenkomst elektronisch ter beschikking gesteld."
-      </p>
-    </div>
 
-    <p class="legal-note reveal">
-      Bepalingen over annulering (artikel 9), beëindiging (artikel 10) en aansprakelijkheid (artikel 16) verdienen
-      juridische toetsing vóór zakelijk gebruik en moeten aansluiten bij de werkelijke contracten en verzekeringsdekking van anica.care.
-      Deze voorwaarden zijn bedoeld voor B2B-dienstverlening. Bij overeenkomsten met particuliere consumenten is aanpassing aan het consumentenrecht noodzakelijk.
-    </p>
+    <p class="legal-note reveal">Laatst bijgewerkt: september 2026</p>
 
     <a href="/" class="legal-back reveal">← Terug naar anica.care</a>
 
