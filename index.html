@@ -422,21 +422,23 @@ button { cursor: pointer; }
   overflow: hidden;
   background: #1a0d04;
 }
-/* Gradient fade — portrait merges into dark left edge */
+/* Alleen de naad met de tekstkolom verzachten — de foto zelf blijft vrij.
+   Liep eerder tot 65% over het beeld, waardoor Anica half onder een
+   bruine sluier verdween. */
 .hero-portrait::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, var(--aarde-bg) 0%, rgba(45,21,6,0.6) 30%, transparent 65%);
+  background: linear-gradient(to right, var(--aarde-bg) 0%, rgba(45,21,6,0.5) 7%, transparent 24%);
   z-index: 1;
   pointer-events: none;
 }
+/* Geen kleurfilter: de foto wordt weergegeven zoals hij is aangeleverd. */
 .hero-portrait-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  filter: saturate(0.65) brightness(0.82);
   transition: transform 1.2s ease;
 }
 .hero:hover .hero-portrait-img {
@@ -1319,9 +1321,9 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     min-height: 80vw;
     height: 80vw;
   }
-  /* On mobile portrait stacks below — gradient fades top to transparent */
+  /* Op mobiel staat de foto onder de tekst — alleen de bovenrand verzachten */
   .hero-portrait::before {
-    background: linear-gradient(to bottom, var(--aarde-bg) 0%, rgba(45,21,6,0.4) 25%, transparent 60%);
+    background: linear-gradient(to bottom, var(--aarde-bg) 0%, rgba(45,21,6,0.35) 6%, transparent 20%);
   }
 
   /* Intro pos */
