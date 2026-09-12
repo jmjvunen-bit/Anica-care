@@ -1113,6 +1113,16 @@ button { cursor: pointer; }
   margin-top: 2rem;
   letter-spacing: -0.01em;
 }
+/* Positiebepaling — geen zelfstandige zin, dus ook geen punt */
+.over-hero-lead {
+  margin-top: 1.75rem;
+  font-family: var(--sans);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-mid);
+  max-width: 34ch;
+}
 
 .over-sec {
   padding: 6rem var(--pad);
@@ -1713,7 +1723,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <section class="over-hero-sec">
     <div class="over-hero-inner">
       <span class="eyebrow reveal" data-i18n="over-hero-eyebrow">Over Anica</span>
-      <h1 class="over-hero-hl reveal" style="transition-delay:.15s" data-i18n="over-hl">Psycholoog.<br>Ondernemer.<br>Tussen mens<br>en organisatie.</h1>
+      <h1 class="over-hero-hl reveal" style="transition-delay:.15s" data-i18n="over-hl">Psycholoog.<br>Ondernemer.</h1>
+      <p class="over-hero-lead reveal" style="transition-delay:.3s" data-i18n="over-hl-lead">Tussen mens en organisatie</p>
     </div>
   </section>
 
@@ -1985,7 +1996,8 @@ const T = {
     'ftr-tag': 'Mens · Zorg · Verbinding',
     /* ── over-page ── */
     'over-hero-eyebrow': 'Over Anica',
-    'over-hl': 'Psycholoog.<br>Ondernemer.<br>Tussen mens<br>en organisatie.',
+    'over-hl': 'Psycholoog.<br>Ondernemer.',
+    'over-hl-lead': 'Tussen mens en organisatie',
     'sec-verhaal-label': 'Persoonlijk<br>verhaal',
     'sec-verhaal-body':  '<p>Wat mij altijd heeft geboeid in de zorg, is de combinatie van mens en organisatie. Achter ieder plan, proces of verandertraject zit uiteindelijk een dagelijkse werkelijkheid waarin mensen hun werk moeten kunnen doen en zorg moeten krijgen die bij hen past.</p><blockquote class="pull-quote">Achter ieder plan, proces of verandertraject zit uiteindelijk een dagelijkse werkelijkheid.</blockquote><p>Niet alleen bedenken wat beter kan, maar vooral helpen om daar ook daadwerkelijk iets van te maken.</p>',
     'sec-achter-label':  'Achtergrond',
@@ -2039,7 +2051,8 @@ const T = {
     'ftr-tag': 'People · Care · Connection',
     /* ── over-page ── */
     'over-hero-eyebrow': 'About Anica',
-    'over-hl': 'Psychologist.<br>Entrepreneur.<br>Between people<br>and organisation.',
+    'over-hl': 'Psychologist.<br>Entrepreneur.',
+    'over-hl-lead': 'Between people and organisation',
     'sec-verhaal-label': 'Personal<br>story',
     'sec-verhaal-body':  '<p>What has always fascinated me in healthcare is the combination of people and organisation. Behind every plan, process, or change initiative there is ultimately a daily reality in which people need to do their work and receive care that fits them.</p><blockquote class="pull-quote">Behind every plan, process, or change initiative there is ultimately a daily reality.</blockquote><p>Not just thinking about what could be better, but above all helping to actually make something of it.</p>',
     'sec-achter-label':  'Background',
@@ -2140,7 +2153,8 @@ const T = {
     'ftr-tag': 'Meense · Zörg · Verbinding',
     /* ── over-page ── */
     'over-hero-eyebrow': 'Euver Anica',
-    'over-hl': 'Psycholoog.<br>Óngerneemster.<br>Tösje meense<br>en organisasie.',
+    'over-hl': 'Psycholoog.<br>Óngerneemster.',
+    'over-hl-lead': 'Tösje meense en organisasie',
     'sec-verhaal-label': 'Persoonlijk<br>verhaal',
     'sec-verhaal-body':  '<p>Wèt mich altied hef geboeid in de zörg, is de kombinasie vaan meens en organisasie. Achter eder plan, proces of verandertraject zit uiteindelijk \u2019n daagelijkse werkelijkheid waorin meense huun werk doen mótte en zörg kriege mótte dae bie huun past.</p><blockquote class=\"pull-quote\">Achter eder plan, proces of verandertraject zit uiteindelijk \u2019n daagelijkse werkelijkheid.</blockquote><p>Neet allein bedenke wèt beter kan, mer veureal helpe um dao ouch daadwerkelijk ès vaan te maake.</p>',
     'sec-achter-label':  'Achtergrond',
