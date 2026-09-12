@@ -1342,6 +1342,12 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 
 /* ═══════════════════════════════════════
    PRAKTIJK — uit de praktijk tweaks
+.praktijk-list { border-top: 1px solid var(--rule); margin-top: 3rem; }
+.praktijk-item { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; padding: 2.5rem 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.praktijk-item-name { font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.625rem); font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.2; }
+.praktijk-item-role { font-size: 1rem; line-height: 1.78; color: var(--ink-mid); }
+.praktijk-item-right { display: flex; flex-direction: column; align-items: flex-start; }
+@media (max-width: 768px) { .praktijk-item { grid-template-columns: 1fr; gap: 0.75rem; } }
 ═══════════════════════════════════════ */
 .praktijk-sec .opdracht-title {
   font-size: clamp(1.75rem, 3vw, 2.75rem);
@@ -1500,31 +1506,20 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     <div class="opdracht-inner">
       <div class="opdracht-hd-row reveal">
         <span class="eyebrow" data-i18n="opdracht-eyebrow">Uit de praktijk</span>
-        <h2 class="opdracht-title" id="praktijk-title" data-i18n="opdracht-title">PlusWIJken</h2>
       </div>
-
-      <div class="opdracht-feature">
-        <div class="opdracht-feature-text reveal">
-          <p class="opdracht-feature-name" data-i18n="opdracht-pluswijken-role-full" style="font-family:var(--serif);font-size:1.0625rem;font-style:italic;color:var(--ink-mid);line-height:1.72;max-width:44ch;">Procesbegeleiding &amp; projectleiding zorg</p>
-          <a
-            href="https://www.pluswijken.nl/nieuws/even-voorstellen-anica-cruts"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="opdracht-link"
-            aria-label="Bekijk de samenwerking met PlusWIJken"
-            data-i18n="opdracht-pluswijken-link"
-            style="margin-top:2rem;"
-          >Bekijk de samenwerking &rarr;</a>
+      <div class="praktijk-list">
+        <div class="praktijk-item reveal">
+          <h3 class="praktijk-item-name" id="praktijk-title">PlusWIJken</h3>
+          <div class="praktijk-item-right">
+            <p class="praktijk-item-role" data-i18n="opdracht-pluswijken-role-full">Procesbegeleiding &amp; projectleiding zorg</p>
+            <a href="https://www.pluswijken.nl/nieuws/even-voorstellen-anica-cruts" target="_blank" rel="noopener noreferrer" class="opdracht-link" aria-label="Bekijk de samenwerking met PlusWIJken" data-i18n="opdracht-pluswijken-link" style="margin-top:1.5rem;">Bekijk de samenwerking &rarr;</a>
+          </div>
         </div>
-        <div class="opdracht-feature-right reveal" style="transition-delay:.15s">
-          <img
-            src="/img/pluswijken-logo.svg"
-            alt="PlusWIJken"
-            class="opdracht-logo-featured"
-            width="344"
-            height="261"
-            loading="lazy"
-          >
+        <div class="praktijk-item reveal" style="transition-delay:.1s">
+          <h3 class="praktijk-item-name">Navioncare</h3>
+          <div class="praktijk-item-right">
+            <a href="https://www.navioncare.com" target="_blank" rel="noopener noreferrer" class="opdracht-link" aria-label="Navioncare website" style="margin-top:0;">navioncare.com &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
