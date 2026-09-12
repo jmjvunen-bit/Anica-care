@@ -158,12 +158,13 @@ button { cursor: pointer; }
 ═══════════════════════════════════════ */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.85s ease, transform 0.85s ease;
+  transform: translateY(24px);
+  filter: blur(5px);
+  transition: opacity 0.95s ease, transform 0.95s ease, filter 0.95s ease;
 }
-.reveal.in { opacity: 1; transform: none; }
+.reveal.in { opacity: 1; transform: none; filter: blur(0); }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
 }
 
 /* ═══════════════════════════════════════
@@ -185,6 +186,28 @@ button { cursor: pointer; }
 .hdr.is-scrolled {
   background: var(--bg);
   border-color: var(--rule);
+}
+
+/* Header over dark hero */
+.hdr[data-over-dark] .hdr-brand,
+.hdr[data-over-dark] .hdr-nav a,
+.hdr[data-over-dark] .hdr-cta {
+  color: var(--aarde-text);
+}
+.hdr[data-over-dark] .hdr-nav a::after { background: var(--aarde-text); }
+.hdr[data-over-dark] .hdr-nav a:hover { color: rgba(240,230,218,0.7); }
+.hdr[data-over-dark] .hdr-cta { border-color: rgba(240,230,218,0.3); }
+.hdr[data-over-dark] .hdr-cta:hover { border-color: var(--aarde-text); color: var(--aarde-text); }
+.hdr[data-over-dark] .lang-pill-btn,
+.hdr[data-over-dark] .lang-pill-btn:hover { color: var(--aarde-text); }
+.hdr[data-over-dark] .lang-dropdown { background: var(--aarde-bg); border-color: rgba(240,230,218,0.15); }
+.hdr[data-over-dark] .lang-dropdown button { color: var(--aarde-soft); }
+.hdr[data-over-dark] .lang-dropdown button:hover,
+.hdr[data-over-dark] .lang-dropdown button[aria-selected="true"] { color: var(--aarde-text); background: rgba(240,230,218,0.08); }
+/* When scrolled past hero restore light bg */
+.hdr[data-over-dark].is-scrolled {
+  background: var(--aarde-bg);
+  border-color: rgba(240,230,218,0.12);
 }
 .hdr-brand {
   display: flex;
@@ -288,13 +311,27 @@ button { cursor: pointer; }
 .mob-nav a:hover { color: var(--klei); }
 
 /* ═══════════════════════════════════════
-   HERO — editorial split
+   HERO — cinematic dark split
 ═══════════════════════════════════════ */
 .hero {
   display: grid;
   grid-template-columns: 57fr 43fr;
-  min-height: 92svh;
+  min-height: 100svh;
   padding-top: 62px;
+  background: var(--aarde-bg);
+  position: relative;
+}
+/* Film grain overlay */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
 }
 
 /* Text column */
@@ -310,29 +347,30 @@ button { cursor: pointer; }
   .hero-text { padding-left: calc((100vw - var(--max)) / 2 + var(--pad)); }
 }
 
-/* Eyebrow — overridden in hero context (no ::before line) */
+/* Eyebrow — overridden in hero context */
 .hero-text .eyebrow {
   font-size: 0.5625rem;
   letter-spacing: 0.26em;
-  color: var(--taupe);
+  color: rgba(240,230,218,0.45);
   margin-bottom: 2.5rem;
 }
-.hero-text .eyebrow::before { background: var(--taupe); width: 1.25rem; }
+.hero-text .eyebrow::before { background: rgba(240,230,218,0.3); width: 1.25rem; }
 
-/* Display headline — large editorial */
+/* Display headline — large cinematic */
 .hero-hl {
   font-family: var(--serif);
-  font-size: clamp(4rem, 7.5vw, 8.5rem);
+  font-size: clamp(4.5rem, 10vw, 12rem);
   font-weight: 300;
   font-style: italic;
-  line-height: 0.98;
+  line-height: 0.95;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: var(--aarde-text);
   text-wrap: balance;
 }
 .hero-hl .dim {
   color: var(--klei);
   display: block;
+  opacity: 0.85;
 }
 
 /* Body copy */
@@ -340,27 +378,37 @@ button { cursor: pointer; }
   margin-top: 2.75rem;
   font-size: 1rem;
   line-height: 1.85;
-  color: var(--ink-mid);
+  color: rgba(240,230,218,0.65);
   max-width: 36ch;
 }
 .hero-sub2 {
   margin-top: 1rem;
   font-size: 0.9375rem;
-  color: var(--ink-soft);
+  color: rgba(240,230,218,0.45);
   max-width: 36ch;
 }
 
-/* Portrait column — full bleed photo */
+/* Portrait column — dark cinematic blend */
 .hero-portrait {
   position: relative;
   overflow: hidden;
-  background: var(--bg-sand);
+  background: #1a0d04;
+}
+/* Gradient fade — portrait merges into dark left edge */
+.hero-portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--aarde-bg) 0%, rgba(45,21,6,0.6) 30%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
 }
 .hero-portrait-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  filter: saturate(0.65) brightness(0.82);
   transition: transform 1.2s ease;
 }
 .hero:hover .hero-portrait-img {
@@ -378,7 +426,7 @@ button { cursor: pointer; }
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(240,230,218,0.5);
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ═══════════════════════════════════════
@@ -1251,6 +1299,10 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
     min-height: 80vw;
     height: 80vw;
   }
+  /* On mobile portrait stacks below — gradient fades top to transparent */
+  .hero-portrait::before {
+    background: linear-gradient(to bottom, var(--aarde-bg) 0%, rgba(45,21,6,0.4) 25%, transparent 60%);
+  }
 
   /* Intro pos */
   .intro-pos-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -1292,7 +1344,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 
 @media (max-width: 480px) {
   :root { --pad: 1.25rem; }
-  .hero-hl { font-size: clamp(3rem, 13vw, 5rem); }
+  .hero-hl { font-size: clamp(3.5rem, 14vw, 6rem); }
   .over-snip-title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
   .contact-title { font-size: clamp(2.25rem, 10vw, 3.5rem); }
   .help-stmt { font-size: clamp(1.125rem, 4.5vw, 1.5rem); }
@@ -1306,7 +1358,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   font-size: 0.875rem;
   font-style: italic;
   font-weight: 400;
-  color: var(--ink-soft);
+  color: rgba(240,230,218,0.55);
   margin-bottom: 0.375rem;
   letter-spacing: 0.04em;
 }
@@ -1316,7 +1368,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--taupe);
+  color: rgba(240,230,218,0.4);
   margin-bottom: 2.5rem;
 }
 .hero-actions {
@@ -1334,14 +1386,14 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--bg);
-  background: var(--ink);
+  color: var(--aarde-bg);
+  background: var(--aarde-text);
   padding: 0.75rem 1.5rem;
   transition: background 0.22s, color 0.22s;
   min-height: 44px;
 }
 .hero-cta:hover {
-  background: var(--klei);
+  background: rgba(240,230,218,0.85);
 }
 .hero-cta-sec {
   font-family: var(--sans);
@@ -1349,8 +1401,8 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--klei);
-  border-bottom: 1px solid var(--klei);
+  color: rgba(240,230,218,0.6);
+  border-bottom: 1px solid rgba(240,230,218,0.3);
   padding-bottom: 2px;
   transition: gap 0.22s, opacity 0.22s;
   display: inline-flex;
@@ -1358,7 +1410,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   gap: 0.4rem;
   min-height: 44px;
 }
-.hero-cta-sec:hover { opacity: 0.65; }
+.hero-cta-sec:hover { opacity: 0.7; }
 
 /* ═══════════════════════════════════════
    AANBOD — editorial 3-item layout
@@ -1457,6 +1509,21 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 .li-link-dark:hover { color: var(--taupe); }
 
 /* ═══════════════════════════════════════
+   CHAPTER NUMBERS
+═══════════════════════════════════════ */
+.chapter-num {
+  display: block;
+  font-family: var(--serif);
+  font-size: 0.625rem;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--taupe);
+  margin-bottom: 0.625rem;
+  opacity: 0.65;
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE — mobile aanbod & hero
 ═══════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -1532,7 +1599,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
 <main id="main-page">
 
   <!-- HERO -->
-  <section class="hero" aria-label="Introductie">
+  <section class="hero" id="hero-sec" aria-label="Introductie">
     <div class="hero-text">
       <p class="hero-intro reveal" style="transition-delay:.02s">Anica</p>
       <p class="hero-descriptor reveal" style="transition-delay:.06s" data-i18n="hero-descriptor">zorgadvies &middot; beleid &middot; projectmanagement</p>
@@ -1558,6 +1625,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <section class="aanbod" id="aanbod" aria-labelledby="aanbod-title">
     <div class="aanbod-inner">
       <div class="aanbod-hd reveal">
+        <span class="chapter-num">I</span>
         <span class="eyebrow" data-i18n="aanbod-eyebrow">Waarmee ik help</span>
         <p class="aanbod-intro" data-i18n="aanbod-intro">Een vraagstuk verhelderen, beleid uitvoerbaar maken of een project verder brengen: ik help bepalen wat nodig is en hoe je verder kunt.</p>
       </div>
@@ -1582,6 +1650,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <section class="opdracht praktijk-sec" id="praktijk" aria-labelledby="praktijk-title">
     <div class="opdracht-inner">
       <div class="opdracht-hd-row reveal">
+        <span class="chapter-num">II</span>
         <span class="eyebrow" data-i18n="opdracht-eyebrow">Uit de praktijk</span>
       </div>
       <div class="praktijk-list">
@@ -1606,6 +1675,7 @@ a:focus-visible, button:focus-visible { border-radius: 1px; }
   <section class="over-snip" aria-labelledby="over-snip-title">
     <div class="over-snip-inner">
       <div class="over-snip-left reveal">
+        <span class="chapter-num">III</span>
         <span class="eyebrow" data-i18n="over-snip-eyebrow">Over Anica</span>
         <h2 class="over-snip-title" id="over-snip-title" data-i18n="over-snip-h2">Werken op het snijvlak van inhoud, samenwerking en uitvoering.</h2>
         <a href="#" class="text-link" onclick="goOver(event)" data-i18n="over-snip-link">Meer over mij &rarr;</a>
@@ -1759,6 +1829,24 @@ const hdr = document.getElementById('hdr');
 window.addEventListener('scroll', () => {
   hdr.classList.toggle('is-scrolled', window.scrollY > 20);
 }, { passive: true });
+
+/* ─── Header dark state over dark hero ─── */
+(function() {
+  const heroSec = document.getElementById('hero-sec');
+  if (!heroSec || !('IntersectionObserver' in window)) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        hdr.setAttribute('data-over-dark', '');
+      } else {
+        hdr.removeAttribute('data-over-dark');
+      }
+    });
+  }, { threshold: 0.05 });
+  obs.observe(heroSec);
+  /* Set initial state */
+  hdr.setAttribute('data-over-dark', '');
+})();
 
 /* ─── Mobile nav ─── */
 function toggleMob() {
